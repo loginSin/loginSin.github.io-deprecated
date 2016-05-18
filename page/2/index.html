@@ -3,24 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>制作.a静态库(支持bitcode) | loginSin&#39;s blog</title>
+  <title>loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
-制作静态库完整流程
-1.创建静态库">
-<meta property="og:type" content="article">
-<meta property="og:title" content="制作.a静态库(支持bitcode)">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/index.html">
+  <meta name="description" content="记录一下开发过程中遇到的问题">
+<meta property="og:type" content="website">
+<meta property="og:title" content="loginSin's blog">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/page/2/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
-制作静态库完整流程
-1.创建静态库">
-<meta property="og:updated_time" content="2016-05-18T03:39:57.000Z">
+<meta property="og:description" content="记录一下开发过程中遇到的问题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="制作.a静态库(支持bitcode)">
-<meta name="twitter:description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
-制作静态库完整流程
-1.创建静态库">
+<meta name="twitter:title" content="loginSin's blog">
+<meta name="twitter:description" content="记录一下开发过程中遇到的问题">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -73,7 +66,57 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-解压.a静态库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/解压.a静态库/" class="article-date">
+  <time datetime="2016-05-18T03:46:19.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/解压.a静态库/">解压.a静态库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压</p>
+<p>1.进入.a所在的文件夹</p>
+<p>2.查看.a包含的架构</p>
+<p>使用命令：file lib.a 或者 lipo -info lib.a</p>
+<p>3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a</p>
+<p>使用命令：lipo lib.a -thin armv7 -output v7.a</p>
+<p>4.此时文件夹中应该多了一个v7.a，抽离.a文件的object</p>
+<p>使用命令：ar -x v7.a</p>
+<p>5.文件中会多若干.o文件，比如多了一个View.o文件</p>
+<p>使用命令：nm View.o &gt; View.m</p>
+<p>然后看看.m的内容,里面只有方法的声明和属性</p>
+<p>但是这个解压只能恢复一部分.m文件的内容，并不能看到.m中完全的实现，如果能被看到，那制作静态库也就没有必要了，但是可以从中获取一些信息，帮助我们对.m进行分析，如果准备搞逆向，这样还是可以提供一些信息的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocmvw22000a4c1qdkoqe68v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" class="article-date">
   <time datetime="2016-05-18T03:23:31.000Z" itemprop="datePublished">2016-05-18</time>
@@ -86,8 +129,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      制作.a静态库(支持bitcode)
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/">制作.a静态库(支持bitcode)</a>
     </h1>
   
 
@@ -131,29 +174,137 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/loginSin.github.io/2016/05/18/解压.a静态库/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          解压.a静态库
-        
-      </div>
-    </a>
-  
-  
-    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">mac创建root用户</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" class="article-date">
+  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac创建root用户/">mac创建root用户</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.切换至root：su root，然后输入密码</p>
+<p>2.如果不存在root用户，输入：sudo passwd root</p>
+<p>在输入两次，root就创建成功了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocmvw1q00044c1qrzgfl3kz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
   
 </article>
 
+
+  
+    <article id="post-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/" class="article-date">
+  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/">mac显示隐藏文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocmvw1r00054c1qf1wp5wnq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mac关闭rootless" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/mac关闭rootless/" class="article-date">
+  <time datetime="2016-05-18T02:57:56.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac关闭rootless/">mac关闭rootless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mac10.11 之后无法使用root来访问以下路径</p>
+<p>/System<br>/bin<br>/sbin<br>/usr (except /usr/local)</p>
+<p>可以关闭rootless，</p>
+<p>1.restart 电脑</p>
+<p>2.按command+r进入安全模式</p>
+<p>3.找到实用工具-&gt;终端，输入：</p>
+<p>csrutil disable #关闭rootless</p>
+<p>csrutil enable #开启rootless</p>
+<p>4.restart 电脑</p>
+<p>5.使用root来进行相关的操作，建议操作完成之后再把rootless开启</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocmvw1p00034c1qia0ca8sh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/loginSin.github.io/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><span class="page-number current">2</span>
+  </nav>
 </section>
         
           <aside id="sidebar">

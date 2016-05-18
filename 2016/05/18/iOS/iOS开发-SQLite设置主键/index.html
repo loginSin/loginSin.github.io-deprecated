@@ -3,24 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mac创建root用户 | loginSin&#39;s blog</title>
+  <title>iOS开发-SQLite设置主键 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
+  <meta name="description" content="SQLite命令大全：http://www.runoob.com/sqlite/sqlite-alter-command.html
+如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。
+sqlite3.5确实没有alter table t drop constraint , alter table t add constraint primary key 的用法
+不过，也有解决方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac创建root用户">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/mac创建root用户/index.html">
+<meta property="og:title" content="iOS开发-SQLite设置主键">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/iOS/iOS开发-SQLite设置主键/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
-<meta property="og:updated_time" content="2016-05-18T03:18:32.000Z">
+<meta property="og:description" content="SQLite命令大全：http://www.runoob.com/sqlite/sqlite-alter-command.html
+如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。
+sqlite3.5确实没有alter table t drop constraint , alter table t add constraint primary key 的用法
+不过，也有解决方案">
+<meta property="og:updated_time" content="2016-05-18T08:55:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac创建root用户">
-<meta name="twitter:description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
+<meta name="twitter:title" content="iOS开发-SQLite设置主键">
+<meta name="twitter:description" content="SQLite命令大全：http://www.runoob.com/sqlite/sqlite-alter-command.html
+如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。
+sqlite3.5确实没有alter table t drop constraint , alter table t add constraint primary key 的用法
+不过，也有解决方案">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -73,10 +76,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS/iOS开发-SQLite设置主键" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" class="article-date">
-  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
+    <a href="/loginSin.github.io/2016/05/18/iOS/iOS开发-SQLite设置主键/" class="article-date">
+  <time datetime="2016-05-18T08:53:05.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
   </div>
@@ -87,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mac创建root用户
+      iOS开发-SQLite设置主键
     </h1>
   
 
@@ -95,14 +98,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.切换至root：su root，然后输入密码</p>
-<p>2.如果不存在root用户，输入：sudo passwd root</p>
-<p>在输入两次，root就创建成功了</p>
+        <p>SQLite命令大全：<br><a href="http://www.runoob.com/sqlite/sqlite-alter-command.html" target="_blank" rel="external">http://www.runoob.com/sqlite/sqlite-alter-command.html</a></p>
+<p>如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。</p>
+<p>sqlite3.5确实没有alter table t drop constraint <em>, alter table t add constraint primary key </em>的用法</p>
+<p>不过，也有解决方案，不会有太大的影响</p>
+<p>解决思路是：</p>
+<p>建新表–&gt;旧表数据复制进新表–&gt;删旧表–&gt;新表重命名为旧表的名称<br>//原始的表结构</p>
+<p>1.NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;</p>
+<p>//新的表结构</p>
+<p>2.NSString *sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;</p>
+<p>//将旧表数据复制进新表</p>
+<p>3.NSString <em>sqlUpdateAllData = @”insert into EmpListNew select </em> from EmpList”;</p>
+<p>//删除旧表</p>
+<p>4.NSString *sqlDropOldTable = @”drop table EmpList”;</p>
+<p>//把新表命名为旧表</p>
+<p>5.NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
+<p>使用FMDB来执行上面的sql语句既可以了</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocmvw1q00044c1qrzgfl3kz" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS/iOS开发-SQLite设置主键/" data-id="ciocmvw2u000d4c1q7wnd8b2a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +127,19 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          制作.a静态库(支持bitcode)
+          iOS开发-SQLite设置主键
         
       </div>
     </a>
   
   
-    <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/18/iOS/iOS开发-使用FMDB进行数据库版本更新/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">mac显示隐藏文件</div>
+      <div class="article-nav-title">iOS开发-使用FMDB进行数据库版本更新</div>
     </a>
   
 </nav>
