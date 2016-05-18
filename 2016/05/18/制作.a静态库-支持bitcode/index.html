@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>loginSin&#39;s blog</title>
+  <title>制作.a静态库(支持bitcode) | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="loginSin's blog">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/index.html">
+  <meta name="description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
+制作静态库完整流程
+1.创建静态库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作.a静态库(支持bitcode)">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description">
+<meta property="og:description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
+制作静态库完整流程
+1.创建静态库">
+<meta property="og:updated_time" content="2016-05-18T03:39:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="loginSin's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="制作.a静态库(支持bitcode)">
+<meta name="twitter:description" content="在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库
+制作静态库完整流程
+1.创建静态库">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -62,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" class="article-date">
   <time datetime="2016-05-18T03:23:31.000Z" itemprop="datePublished">2016-05-18</time>
@@ -77,8 +82,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/">制作.a静态库(支持bitcode)</a>
+    <h1 class="article-title" itemprop="name">
+      制作.a静态库(支持bitcode)
     </h1>
   
 
@@ -122,132 +127,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" class="article-date">
-  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac创建root用户/">mac创建root用户</a>
-    </h1>
+    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mac创建root用户</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.切换至root：su root，然后输入密码</p>
-<p>2.如果不存在root用户，输入：sudo passwd root</p>
-<p>在输入两次，root就创建成功了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocbklc10000861qbjc57bkd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/" class="article-date">
-  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/">mac显示隐藏文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocbklc80002861q2rfpg5f4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mac关闭rootless" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac关闭rootless/" class="article-date">
-  <time datetime="2016-05-18T02:57:56.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/mac关闭rootless/">mac关闭rootless</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>mac10.11 之后无法使用root来访问以下路径</p>
-<p>/System<br>/bin<br>/sbin<br>/usr (except /usr/local)</p>
-<p>可以关闭rootless，</p>
-<p>1.restart 电脑</p>
-<p>2.按command+r进入安全模式</p>
-<p>3.找到实用工具-&gt;终端，输入：</p>
-<p>csrutil disable #关闭rootless</p>
-<p>csrutil enable #开启rootless</p>
-<p>4.restart 电脑</p>
-<p>5.使用root来进行相关的操作，建议操作完成之后再把rootless开启</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocbklc60001861qk413lnu1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
