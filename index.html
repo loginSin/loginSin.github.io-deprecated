@@ -68,6 +68,126 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-安装VVDocumenter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/安装VVDocumenter/" class="article-date">
+  <time datetime="2016-05-18T04:24:49.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/安装VVDocumenter/">安装VVDocumenter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter</p>
+<p>VVDocumenter下载地址：<a href="https://github.com/onevcat/VVDocumenter-Xcode.git">https://github.com/onevcat/VVDocumenter-Xcode.git</a></p>
+<p>1.里面是一个Xcode工程，打开工程运行<br>2.运行完成之后，command + q，完全退出Xcode<br>3.再次打开Xcode弹出：<br>/Users/sin/Downloads/654358-d7f2b0c925321110.png.jpeg</p>
+<p>点击Load Bundle，加载成功之后再Xcode的window选项中会在“Bring All To Font”下面出现一个VVDocumenter，如果没有则表示安装失败</p>
+<p>4.安装失败的解决方案：<br>使用finder进入~/Library/Application Support/Developer/Shared/Xcode，<br>删除Plug-ins下的 VVDocumenter-Xcode.xcplugin，重复步骤1-3</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装VVDocumenter/" data-id="ciocdiy0m0005o21q4n3yrmxq" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-使用appledoc自动生成文档" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" class="article-date">
+  <time datetime="2016-05-18T03:51:54.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/">使用appledoc自动生成文档</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.jianshu.com/p/d0c7d9040c93" target="_blank" rel="external">http://www.jianshu.com/p/d0c7d9040c93</a></p>
+<p><a href="http://www.jianshu.com/p/f4c3bd04b887" target="_blank" rel="external">http://www.jianshu.com/p/f4c3bd04b887</a></p>
+<p>在公司制作静态库的过程中要求写说明文档，本着能懒就懒的原则，在网上找了找自动生成文档的方法，还是被我找到了，现在分享一下<br>建议下载安装一下onevcat大神的VVDocumenter，方便生成注释，地址：<br><a href="https://github.com/onevcat/VVDocumenter-Xcode.git">https://github.com/onevcat/VVDocumenter-Xcode.git</a><br>使用方法：使用Xcode打开项目，运行一下就可以了</p>
+<p>1.安装appledoc，详情见<a href="http://www.jianshu.com/p/f4c3bd04b887" target="_blank" rel="external">http://www.jianshu.com/p/f4c3bd04b887</a></p>
+<p>2.进入代码所在目录</p>
+<p>3.终端输入：</p>
+<p>appledoc –project-name 项目名 –project-company 公司名 ./</p>
+<p>注：执行成功之后会在代码所在目录生成一个docset-installed.txt</p>
+<p>4.进入xcode，点击</p>
+<p>File-&gt;New-&gt;Target-&gt;Other-&gt;Aggregate</p>
+<p>5.点击第4步创建的target</p>
+<p>Build Phases-&gt;左上角“+”号-&gt;New Run Script Phase</p>
+<p>6.将下面脚本复制进输入框中</p>
+<p>7.编译(Command+B)</p>
+<p>8.打开docset-installed.txt，进入里面保存的文档路径的文件</p>
+<p>9.选择对应的.docset文件，右击</p>
+<p>显示包内容-&gt;Contents-&gt;Resources-&gt;Documents</p>
+<p>10.Documents文件夹的内容就是文档，将整个Documents文件夹拷到你想放说明文档的位置就行了</p>
+<p>脚本：</p>
+<p>#appledoc Xcode script  </p>
+<h1 id="Start-constants"><a href="#Start-constants" class="headerlink" title="Start constants"></a>Start constants</h1><p>company=”ACME”;   </p>
+<p>companyID=”com.ACME”; </p>
+<p>companyURL=”<a href="http://ACME.com" target="_blank" rel="external">http://ACME.com</a>“; </p>
+<p>target=”iphoneos”;</p>
+<p>#target=”macosx”;</p>
+<p>outputPath=”~/help”;</p>
+<h1 id="End-constants"><a href="#End-constants" class="headerlink" title="End constants"></a>End constants</h1><p>/usr/local/bin/appledoc \ </p>
+<p>–project-name “${PROJECT_NAME}” \ </p>
+<p>–project-company “${company}” \ </p>
+<p>–company-id “${companyID}” \ </p>
+<p>–docset-atom-filename “${company}.atom” \ </p>
+<p>–docset-feed-url “${companyURL}/${company}/%DOCSETATOMFILENAME” \ </p>
+<p>–docset-package-url “${companyURL}/${company}/%DOCSETPACKAGEFILENAME” \ </p>
+<p>–docset-fallback-url “${companyURL}/${company}” \ </p>
+<p>–output “${outputPath}” \ </p>
+<p>–publish-docset \ </p>
+<p>–docset-platform-family “${target}” \ </p>
+<p>–logformat xcode \ </p>
+<p>–keep-intermediate-files \ </p>
+<p>–no-repeat-first-par \ </p>
+<p>–no-warn-invalid-crossref \ </p>
+<p>–exit-threshold 2 \</p>
+<p>“${PROJECT_DIR}”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" data-id="ciocdiy0j0003o21q4free1sp" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-解压.a静态库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/解压.a静态库/" class="article-date">
@@ -106,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocbz18h0004a51qq6l87vb3" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocdiy0n0006o21qe7qznu77" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -168,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="ciocbz18g0003a51q4fgfbxgr" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="ciocdiy0l0004o21qoast4xws" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -207,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocbz1850000a51qt6hbdldv" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocdiy0d0001o21qvuunwh3q" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -244,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocbz18d0002a51qa4oc9c1t" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocdiy0g0002o21qtoa00ggt" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -290,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocbz18a0001a51qin3oftds" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocdiy080000o21qfxpbdbps" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -330,6 +450,14 @@
       <ul>
         
           <li>
+            <a href="/loginSin.github.io/2016/05/18/安装VVDocumenter/">安装VVDocumenter</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/">使用appledoc自动生成文档</a>
+          </li>
+        
+          <li>
             <a href="/loginSin.github.io/2016/05/18/解压.a静态库/">解压.a静态库</a>
           </li>
         
@@ -339,14 +467,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/05/18/mac创建root用户/">mac创建root用户</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/">mac显示隐藏文件</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/18/mac关闭rootless/">mac关闭rootless</a>
           </li>
         
       </ul>
