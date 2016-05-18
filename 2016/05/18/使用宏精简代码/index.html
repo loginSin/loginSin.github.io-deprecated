@@ -3,24 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mac创建root用户 | loginSin&#39;s blog</title>
+  <title>使用宏精简代码 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
+  <meta name="description" content="如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit
+//set方法将其宏定义
+#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\[userDefaluts setValue:argv1 forKey:argv2];
+/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac创建root用户">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/mac创建root用户/index.html">
+<meta property="og:title" content="使用宏精简代码">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/使用宏精简代码/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
-<meta property="og:updated_time" content="2016-05-18T03:18:32.000Z">
+<meta property="og:description" content="如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit
+//set方法将其宏定义
+#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\[userDefaluts setValue:argv1 forKey:argv2];
+/">
+<meta property="og:updated_time" content="2016-05-18T08:19:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac创建root用户">
-<meta name="twitter:description" content="1.切换至root：su root，然后输入密码
-2.如果不存在root用户，输入：sudo passwd root
-在输入两次，root就创建成功了">
+<meta name="twitter:title" content="使用宏精简代码">
+<meta name="twitter:description" content="如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit
+//set方法将其宏定义
+#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\[userDefaluts setValue:argv1 forKey:argv2];
+/">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -73,10 +76,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-使用宏精简代码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" class="article-date">
-  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
+    <a href="/loginSin.github.io/2016/05/18/使用宏精简代码/" class="article-date">
+  <time datetime="2016-05-18T08:17:15.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
   </div>
@@ -87,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mac创建root用户
+      使用宏精简代码
     </h1>
   
 
@@ -95,14 +98,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.切换至root：su root，然后输入密码</p>
-<p>2.如果不存在root用户，输入：sudo passwd root</p>
-<p>在输入两次，root就创建成功了</p>
+        <p>如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit</p>
+<p>//set方法将其宏定义</p>
+<p>#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>[userDefaluts setValue:argv1 forKey:argv2];</p>
+<p>//get方法将其宏定义</p>
+<p>#define USERDEFAULT_GET(argv) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>return [userDefaluts valueForKey:argv];</p>
+<p>static NSString <em>userNameKey = @”TVUserName”;<br>static NSString </em>userPassKey = @”TVUserPass”;<br>static NSString *userGenderKey = @”TVUserGender”;</p>
+<p>@implementation TVModelManager</p>
+<ul>
+<li>(void)setUserName:(NSString *)userName {<br>  USERDEFAULT_SET(userName,userNameKey);<br>}</li>
+<li>(NSString *)getUserName {<br>  USERDEFAULT_GET(userNameKey);<br>}</li>
+<li>(void)setUserPass:(NSString *)userPass {<br>  USERDEFAULT_SET(userPass, userPassKey);<br>}</li>
+<li>(NSString *)getUserPass {<br>  USERDEFAULT_GET(userPassKey);<br>}</li>
+<li>(void)setUserGender:(BOOL)gender {<br>  NSString *sex = gender ? @”male”:@”female”;<br>  USERDEFAULT_SET(sex, userGenderKey);<br>}</li>
+<li>(NSString *)getUserGender {<br>  USERDEFAULT_GET(userGenderKey);<br>}</li>
+</ul>
+<p>#undef USERDEFAULT_GET</p>
+<p>#undef USERDEFAULT_SET</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="cioclkj8800020d1qzonic94b" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用宏精简代码/" data-id="cioclkj8d00050d1q9553swrm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,19 +128,10 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          制作.a静态库(支持bitcode)
-        
-      </div>
-    </a>
   
-  
-    <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发过程中使用的一些宏/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">mac显示隐藏文件</div>
+      <div class="article-nav-title">iOS使用的一些宏</div>
     </a>
   
 </nav>

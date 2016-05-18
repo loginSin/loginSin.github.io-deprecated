@@ -68,6 +68,119 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-使用宏精简代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/使用宏精简代码/" class="article-date">
+  <time datetime="2016-05-18T08:17:15.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/使用宏精简代码/">使用宏精简代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit</p>
+<p>//set方法将其宏定义</p>
+<p>#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>[userDefaluts setValue:argv1 forKey:argv2];</p>
+<p>//get方法将其宏定义</p>
+<p>#define USERDEFAULT_GET(argv) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>return [userDefaluts valueForKey:argv];</p>
+<p>static NSString <em>userNameKey = @”TVUserName”;<br>static NSString </em>userPassKey = @”TVUserPass”;<br>static NSString *userGenderKey = @”TVUserGender”;</p>
+<p>@implementation TVModelManager</p>
+<ul>
+<li>(void)setUserName:(NSString *)userName {<br>  USERDEFAULT_SET(userName,userNameKey);<br>}</li>
+<li>(NSString *)getUserName {<br>  USERDEFAULT_GET(userNameKey);<br>}</li>
+<li>(void)setUserPass:(NSString *)userPass {<br>  USERDEFAULT_SET(userPass, userPassKey);<br>}</li>
+<li>(NSString *)getUserPass {<br>  USERDEFAULT_GET(userPassKey);<br>}</li>
+<li>(void)setUserGender:(BOOL)gender {<br>  NSString *sex = gender ? @”male”:@”female”;<br>  USERDEFAULT_SET(sex, userGenderKey);<br>}</li>
+<li>(NSString *)getUserGender {<br>  USERDEFAULT_GET(userGenderKey);<br>}</li>
+</ul>
+<p>#undef USERDEFAULT_GET</p>
+<p>#undef USERDEFAULT_SET</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用宏精简代码/" data-id="cioclkj8d00050d1q9553swrm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发过程中使用的一些宏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发过程中使用的一些宏/" class="article-date">
+  <time datetime="2016-05-18T08:13:38.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发过程中使用的一些宏/">iOS使用的一些宏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到</p>
+<p>#if defined(<strong>GNUC</strong>) &amp;&amp; (<strong>GNUC</strong> &gt;= 4) &amp;&amp; defined(<strong>APPLE_CC</strong>) &amp;&amp; (<strong>APPLE_CC</strong> &gt;= 5465)</p>
+<p>#define TF_DEPRECATED(_version) <strong>attribute</strong>((deprecated))</p>
+<p>#else</p>
+<p>#define TF_DEPRECATED(_version)</p>
+<p>#endif<br>eg:表示在0.1.1之后被废弃了</p>
+<ul>
+<li>(void)voiceprintExistent:(void(^)(BOOL isExist,NSString <em>errorCode,NSError </em>error))resultBlock TF_DEPRECATED(0.1.1);</li>
+</ul>
+<p>2.release版本屏蔽log</p>
+<p>#ifdef DEBUG</p>
+<p>#else</p>
+<p>#define printf(…)</p>
+<p>#define NSLog(…)</p>
+<p>#define TFLog(…)</p>
+<p>#define TFNetLog(…)</p>
+<p>#endif</p>
+<p>3.自定义log提示</p>
+<p>#ifdef __cplusplus<br>extern “C” {</p>
+<p>#endif // __cplusplus</p>
+<pre><code>void TFNetLog(NSString *format, ...);
+void TFLog(NSString *format, ...);
+</code></pre><p>#ifdef __cplusplus<br>}</p>
+<p>#endif // __cplusplus</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发过程中使用的一些宏/" data-id="cioclkj8000000d1q8lfoy2ry" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-安装appledoc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/安装appledoc/" class="article-date">
@@ -95,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装appledoc/" data-id="ciocklsl60006yt1qj8ht08eq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装appledoc/" data-id="cioclkj8l00080d1qbd2w4qx2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装VVDocumenter/" data-id="ciocklsl50005yt1q7fjhzf4x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装VVDocumenter/" data-id="cioclkj8i00070d1qcv7bauwl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" data-id="ciocklsl20003yt1q42mmu67g" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" data-id="cioclkj8b00040d1qqhi96a87" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocklsl90007yt1q2keccdao" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="cioclkj8o00090d1qn06wm8qj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="ciocklsl30004yt1qbq9ss591" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="cioclkj8f00060d1q5bx2y2dk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -361,7 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocklskw0001yt1q6ftjz60s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="cioclkj8800020d1qzonic94b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocklskz0002yt1qz1ixgsl4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="cioclkj8a00030d1q0c9rnyjt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -444,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocklskr0000yt1q53qm8u0t" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="cioclkj8500010d1qvujmxmdu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,7 +583,7 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">8</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">10</span></li></ul>
   </div>
 
 
@@ -482,6 +595,14 @@
       <ul>
         
           <li>
+            <a href="/loginSin.github.io/2016/05/18/使用宏精简代码/">使用宏精简代码</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/05/18/iOS开发过程中使用的一些宏/">iOS使用的一些宏</a>
+          </li>
+        
+          <li>
             <a href="/loginSin.github.io/2016/05/18/安装appledoc/">安装appledoc</a>
           </li>
         
@@ -491,14 +612,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/">使用appledoc自动生成文档</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/18/解压.a静态库/">解压.a静态库</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/">制作.a静态库(支持bitcode)</a>
           </li>
         
       </ul>
