@@ -3,18 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mac显示隐藏文件 | loginSin&#39;s blog</title>
+  <title>解压.a静态库 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件">
+  <meta name="description" content="上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压
+1.进入.a所在的文件夹
+2.查看.a包含的架构
+使用命令：file lib.a 或者 lipo -info lib.a
+3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a
+使用命令：lipo lib.a -thin armv7 -output v7.a
+4.此时文件夹中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac显示隐藏文件">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/mac显示隐藏文件/index.html">
+<meta property="og:title" content="解压.a静态库">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/解压.a静态库/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件">
-<meta property="og:updated_time" content="2016-05-18T03:17:45.000Z">
+<meta property="og:description" content="上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压
+1.进入.a所在的文件夹
+2.查看.a包含的架构
+使用命令：file lib.a 或者 lipo -info lib.a
+3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a
+使用命令：lipo lib.a -thin armv7 -output v7.a
+4.此时文件夹中">
+<meta property="og:updated_time" content="2016-05-18T03:50:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac显示隐藏文件">
-<meta name="twitter:description" content="defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件">
+<meta name="twitter:title" content="解压.a静态库">
+<meta name="twitter:description" content="上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压
+1.进入.a所在的文件夹
+2.查看.a包含的架构
+使用命令：file lib.a 或者 lipo -info lib.a
+3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a
+使用命令：lipo lib.a -thin armv7 -output v7.a
+4.此时文件夹中">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -67,10 +85,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-解压.a静态库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/mac显示隐藏文件/" class="article-date">
-  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
+    <a href="/loginSin.github.io/2016/05/18/解压.a静态库/" class="article-date">
+  <time datetime="2016-05-18T03:46:19.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
   </div>
@@ -81,7 +99,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mac显示隐藏文件
+      解压.a静态库
     </h1>
   
 
@@ -89,12 +107,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
+        <p>上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压</p>
+<p>1.进入.a所在的文件夹</p>
+<p>2.查看.a包含的架构</p>
+<p>使用命令：file lib.a 或者 lipo -info lib.a</p>
+<p>3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a</p>
+<p>使用命令：lipo lib.a -thin armv7 -output v7.a</p>
+<p>4.此时文件夹中应该多了一个v7.a，抽离.a文件的object</p>
+<p>使用命令：ar -x v7.a</p>
+<p>5.文件中会多若干.o文件，比如多了一个View.o文件</p>
+<p>使用命令：nm View.o &gt; View.m</p>
+<p>然后看看.m的内容,里面只有方法的声明和属性</p>
+<p>但是这个解压只能恢复一部分.m文件的内容，并不能看到.m中完全的实现，如果能被看到，那制作静态库也就没有必要了，但是可以从中获取一些信息，帮助我们对.m进行分析，如果准备搞逆向，这样还是可以提供一些信息的</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocbz18d0002a51qa4oc9c1t" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocbz18h0004a51qq6l87vb3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -103,19 +132,10 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/18/mac创建root用户/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          mac创建root用户
-        
-      </div>
-    </a>
   
-  
-    <a href="/loginSin.github.io/2016/05/18/mac关闭rootless/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">mac关闭rootless</div>
+      <div class="article-nav-title">制作.a静态库(支持bitcode)</div>
     </a>
   
 </nav>
