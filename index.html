@@ -90,11 +90,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>appledoc的git地址：<a href="https://github.com/tomaz/appledoc.git">https://github.com/tomaz/appledoc.git</a><br>1.下载appledoc<br>2.进入./appledoc文件夹<br>3.安装：sudo sh install-appledoc.sh<br>4.检测：appledoc –version</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装appledoc/" data-id="ciocgg4d10006sy1qra5aqpub" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装appledoc/" data-id="cioch6or30006u71qvodbwkn9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装VVDocumenter/" data-id="ciocgg4d00005sy1q4csqe38s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/安装VVDocumenter/" data-id="cioch6or20005u71qf4pp8txa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,25 +167,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="http://www.jianshu.com/p/d0c7d9040c93" target="_blank" rel="external">http://www.jianshu.com/p/d0c7d9040c93</a></p>
-<p><a href="http://www.jianshu.com/p/f4c3bd04b887" target="_blank" rel="external">http://www.jianshu.com/p/f4c3bd04b887</a></p>
-<p>在公司制作静态库的过程中要求写说明文档，本着能懒就懒的原则，在网上找了找自动生成文档的方法，还是被我找到了，现在分享一下<br>建议下载安装一下onevcat大神的VVDocumenter，方便生成注释，地址：<br><a href="https://github.com/onevcat/VVDocumenter-Xcode.git">https://github.com/onevcat/VVDocumenter-Xcode.git</a><br>使用方法：使用Xcode打开项目，运行一下就可以了</p>
-<p>1.安装appledoc，详情见<a href="http://www.jianshu.com/p/f4c3bd04b887" target="_blank" rel="external">http://www.jianshu.com/p/f4c3bd04b887</a></p>
-<p>2.进入代码所在目录</p>
-<p>3.终端输入：</p>
+        <p>在公司制作静态库的过程中要求写说明文档，本着能懒就懒的原则，在网上找了找自动生成文档的方法，还是被我找到了，现在分享一下<br>建议下载安装一下onevcat大神的VVDocumenter，方便生成注释，参见我的博客《安装VVDocumenter》<br>安装appledoc，参见我的博客《安装appledoc》</p>
+<p>1.进入代码所在目录</p>
+<p>2.终端输入：</p>
 <p>appledoc –project-name 项目名 –project-company 公司名 ./</p>
 <p>注：执行成功之后会在代码所在目录生成一个docset-installed.txt</p>
-<p>4.进入xcode，点击</p>
+<p>3.进入xcode，点击</p>
 <p>File-&gt;New-&gt;Target-&gt;Other-&gt;Aggregate</p>
-<p>5.点击第4步创建的target</p>
+<p>4.点击第4步创建的target</p>
 <p>Build Phases-&gt;左上角“+”号-&gt;New Run Script Phase</p>
-<p>6.将下面脚本复制进输入框中</p>
-<p>7.编译(Command+B)</p>
-<p>8.打开docset-installed.txt，进入里面保存的文档路径的文件</p>
-<p>9.选择对应的.docset文件，右击</p>
+<p>5.将下面脚本复制进输入框中</p>
+<p>6.编译(Command+B)</p>
+<p>7.打开docset-installed.txt，进入里面保存的文档路径的文件</p>
+<p>8.选择对应的.docset文件，右击</p>
 <p>显示包内容-&gt;Contents-&gt;Resources-&gt;Documents</p>
-<p>10.Documents文件夹的内容就是文档，将整个Documents文件夹拷到你想放说明文档的位置就行了</p>
-<p>脚本：</p>
+<p>9.Documents文件夹的内容就是文档，将整个Documents文件夹拷到你想放说明文档的位置就行了</p>
+<p>以显示第5步所需的脚本：</p>
 <p>#appledoc Xcode script  </p>
 <h1 id="Start-constants"><a href="#Start-constants" class="headerlink" title="Start constants"></a>Start constants</h1><p>company=”ACME”;   </p>
 <p>companyID=”com.ACME”; </p>
@@ -213,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" data-id="ciocgg4cw0003sy1qxsovomwt" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/使用appledoc自动生成文档/" data-id="cioch6oqx0003u71q3k79cuvv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="ciocgg4d50007sy1qarcrwf7r" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/解压.a静态库/" data-id="cioch6or70007u71q2gzp9qxq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="ciocgg4cy0004sy1qxmtdzlbv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/制作.a静态库-支持bitcode/" data-id="cioch6oqz0004u71qnzzcn13f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -362,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="ciocgg4cu0002sy1qpb44mu0f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac创建root用户/" data-id="cioch6oqm0000u71qykj31vm5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -399,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="ciocgg4cr0001sy1qjvm7sb3k" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac显示隐藏文件/" data-id="cioch6oqu0002u71qywm979a7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="ciocgg4cm0000sy1q31o8lkk6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/mac关闭rootless/" data-id="cioch6oqr0001u71qvvugufsq" class="article-share-link">Share</a>
       
       
     </footer>
