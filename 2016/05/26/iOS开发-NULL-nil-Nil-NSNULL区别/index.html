@@ -3,24 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS使用的一些宏 | loginSin&#39;s blog</title>
+  <title>iOS开发-NULL/nil/Nil/NSNULL区别 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到
-#if defined(GNUC) &amp;amp;&amp;amp; (GNUC &amp;gt;= 4) &amp;amp;&amp;amp; defined(APPLE_CC) &amp;amp;&amp;amp; (APPLE_CC &amp;gt;= 5465)
-#define TF_DEPRECATED(_version) attribute((">
+  <meta name="description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS使用的一些宏">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/index.html">
+<meta property="og:title" content="iOS开发-NULL/nil/Nil/NSNULL区别">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到
-#if defined(GNUC) &amp;amp;&amp;amp; (GNUC &amp;gt;= 4) &amp;amp;&amp;amp; defined(APPLE_CC) &amp;amp;&amp;amp; (APPLE_CC &amp;gt;= 5465)
-#define TF_DEPRECATED(_version) attribute((">
-<meta property="og:updated_time" content="2016-05-18T08:16:26.000Z">
+<meta property="og:description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
+<meta property="og:updated_time" content="2016-05-26T16:02:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS使用的一些宏">
-<meta name="twitter:description" content="1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到
-#if defined(GNUC) &amp;amp;&amp;amp; (GNUC &amp;gt;= 4) &amp;amp;&amp;amp; defined(APPLE_CC) &amp;amp;&amp;amp; (APPLE_CC &amp;gt;= 5465)
-#define TF_DEPRECATED(_version) attribute((">
+<meta name="twitter:title" content="iOS开发-NULL/nil/Nil/NSNULL区别">
+<meta name="twitter:description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -73,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-使用的一些宏" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS开发-NULL-nil-Nil-NSNULL区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" class="article-date">
-  <time datetime="2016-05-18T08:13:38.000Z" itemprop="datePublished">2016-05-18</time>
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" class="article-date">
+  <time datetime="2016-05-26T15:59:08.000Z" itemprop="datePublished">2016-05-26</time>
 </a>
     
   </div>
@@ -87,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS使用的一些宏
+      iOS开发-NULL/nil/Nil/NSNULL区别
     </h1>
   
 
@@ -95,35 +89,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到</p>
-<p>#if defined(<strong>GNUC</strong>) &amp;&amp; (<strong>GNUC</strong> &gt;= 4) &amp;&amp; defined(<strong>APPLE_CC</strong>) &amp;&amp; (<strong>APPLE_CC</strong> &gt;= 5465)</p>
-<p>#define TF_DEPRECATED(_version) <strong>attribute</strong>((deprecated))</p>
-<p>#else</p>
-<p>#define TF_DEPRECATED(_version)</p>
-<p>#endif<br>eg:表示在0.1.1之后被废弃了</p>
-<ul>
-<li>(void)voiceprintExistent:(void(^)(BOOL isExist,NSString <em>errorCode,NSError </em>error))resultBlock TF_DEPRECATED(0.1.1);</li>
-</ul>
-<p>2.release版本屏蔽log</p>
-<p>#ifdef DEBUG</p>
-<p>#else</p>
-<p>#define printf(…)</p>
-<p>#define NSLog(…)</p>
-<p>#define TFLog(…)</p>
-<p>#define TFNetLog(…)</p>
-<p>#endif</p>
-<p>3.自定义log提示</p>
-<p>#ifdef __cplusplus<br>extern “C” {</p>
-<p>#endif // __cplusplus</p>
-<pre><code>void TFNetLog(NSString *format, ...);
-void TFLog(NSString *format, ...);
-</code></pre><p>#ifdef __cplusplus<br>}</p>
-<p>#endif // __cplusplus</p>
+        <p>nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值<br>Nil是OC类的字面零值<br>NULL是C的，空地址，地址的数值为0，是个长整数<br>NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cioohokif000ec21qs3b670d6" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cioohokhc0002c21q4usgqqu6" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -132,19 +103,10 @@ void TFLog(NSString *format, ...);
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
-      <div class="article-nav-title">
-        
-          使用宏精简代码
-        
-      </div>
-    </a>
   
-  
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">安装appledoc</div>
+      <div class="article-nav-title">iOS开发-控件不能交互的原因</div>
     </a>
   
 </nav>
