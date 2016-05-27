@@ -5,16 +5,34 @@
   
   <title>iOS开发-CocoaPods相关 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录一下开发过程中遇到的问题">
+  <meta name="description" content="–执行安装cocoapodssudo gem install cocoapods
+–查看本地配置镜像地址gem sources -l 
+–设置国内淘宝镜像地址gem sources -a https://ruby.taobao.org/
+–执行镜像的安装pod setup   
+新建一个工程，创建一个empty文件
+文件名必须为Podfile，不能改别的名字
+#pod ‘AFNetworking’">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发-CocoaPods相关">
 <meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="记录一下开发过程中遇到的问题">
-<meta property="og:updated_time" content="2016-05-26T15:33:47.000Z">
+<meta property="og:description" content="–执行安装cocoapodssudo gem install cocoapods
+–查看本地配置镜像地址gem sources -l 
+–设置国内淘宝镜像地址gem sources -a https://ruby.taobao.org/
+–执行镜像的安装pod setup   
+新建一个工程，创建一个empty文件
+文件名必须为Podfile，不能改别的名字
+#pod ‘AFNetworking’">
+<meta property="og:updated_time" content="2016-05-27T05:06:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发-CocoaPods相关">
-<meta name="twitter:description" content="记录一下开发过程中遇到的问题">
+<meta name="twitter:description" content="–执行安装cocoapodssudo gem install cocoapods
+–查看本地配置镜像地址gem sources -l 
+–设置国内淘宝镜像地址gem sources -a https://ruby.taobao.org/
+–执行镜像的安装pod setup   
+新建一个工程，创建一个empty文件
+文件名必须为Podfile，不能改别的名字
+#pod ‘AFNetworking’">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -89,11 +107,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>–执行安装cocoapods<br>sudo gem install cocoapods</p>
+<p>–查看本地配置镜像地址<br>gem sources -l </p>
+<p>–设置国内淘宝镜像地址<br>gem sources -a <a href="https://ruby.taobao.org/" target="_blank" rel="external">https://ruby.taobao.org/</a></p>
+<p>–执行镜像的安装<br>pod setup   </p>
+<p>新建一个工程，创建一个empty文件</p>
+<p>文件名必须为Podfile，不能改别的名字</p>
+<p>#pod ‘AFNetworking’,’2.6.0’    固定版本2.6.0</p>
+<p>#pod ‘AFNetworking’,’~&gt;2.6.0’  引入大于2.6.0的版本的AFNetworking</p>
+<p>#pod ‘AFNetworking’,’~&lt;2.6.0’  引入小于2.6.0的版本的AFNetworking</p>
+<p>#pod install 执行装载三方库(先更新本地镜像地址  然后下载最新的三方库到我们的工程 )</p>
+<p>#pod update  执行 先更新本地镜像地址 再更新三方库</p>
+<p>使用CocoaPods需要创建一个Podfile文件<br>(1)Podfile配置如下</p>
+<p>#平台 ios版本</p>
+<p>platform:’ios’,’7.0’</p>
+<p>#忽略 三方类库内部的警告</p>
+<p>inhibit_all_warnings!</p>
+<p>#引入 第三方库 指定的版本号</p>
+<p>pod ‘AFNetworking’,’~&gt;2.6.0’</p>
+<p>(2)执行 pod install</p>
+<p>第一次安装缓慢</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/" data-id="cioozj2l00000dg1q8fnb8t6x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/" data-id="ciop9o9ty0004vt1qxyviodgz" class="article-share-link">Share</a>
       
       
     </footer>
