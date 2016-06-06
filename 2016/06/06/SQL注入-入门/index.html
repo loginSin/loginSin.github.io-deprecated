@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="loginSin's blog">
 <meta property="og:description" content="SQL注入（sql injection）本例以J2EE为例
 先讲一下我们登录的一般流程：当我们使用浏览器进入某些网站输入账号密码登录的时候，浏览器会通过GET或者POST请求（GET请求将账号密码放在在URL中，POST请求将账号密码放在请求体中）将我们的账号密码发送给服务器（某些网站会对用户信息进行加密上传，而有些不会），服务器接收到我们的账号密码之后就会形成一个条sql语句，从数据出查询是否存">
-<meta property="og:updated_time" content="2016-06-06T09:12:10.000Z">
+<meta property="og:updated_time" content="2016-06-06T09:15:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入-入门">
 <meta name="twitter:description" content="SQL注入（sql injection）本例以J2EE为例
@@ -61,7 +61,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -94,7 +94,8 @@
       
         <p>SQL注入（sql injection）<br>本例以J2EE为例</p>
 <p>先讲一下我们登录的一般流程：<br>当我们使用浏览器进入某些网站输入账号密码登录的时候，<br>浏览器会通过GET或者POST请求（GET请求将账号密码放在在URL中，POST请求将账号密码放在请求体中）<br>将我们的账号密码发送给服务器（某些网站会对用户信息进行加密上传，而有些不会），<br>服务器接收到我们的账号密码之后就会形成一个条sql语句，从数据出查询是否存在该账号与密码<br>如果存在就会提示登录成功进入下一个界面，如果不存在那么就错误会提示账号密码错误</p>
-<p>那么我们说好的sql注入该怎么用？<br>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select * from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
+<p>那么我们说好的sql注入该怎么用？<br>先下载一下我写的服务器代码，在eclipse上运行（我是用的是eclipse mars，里面自带tomcat），服务器代码的git地址：<br><a href="https://github.com/loginSin/SQLInjectionServer">https://github.com/loginSin/SQLInjectionServer</a></p>
+<p>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select * from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
 <p>接下来我们开始注入<br>“–”的注释作用<br>将上面的url添加一个“–”，这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123--&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123--&amp;password=123</a><br>我们会惊奇的发现也是登录成功，原因是服务器拿到数据之后拼接成的sql语句变成了<br>select <em> from user where account = 123– and password =123<br>因为“–”在sql语句中意思是注释掉后面的内容，所以上面的sql的真正表达是<br>select </em> from user where account = 123<br>意思是查找账号为123的用户是否存在，直接忽略掉了后半段的查找密码的过程</p>
 <p>“or 1=1”的作用<br>如果url这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123</a> or 1=1&amp;password=123<br>也会登录成功，sql语句变成了<br>select * from user where account = 123 or 1=1 and password =123<br>也会把后半段的验证密码给忽略掉</p>
 <p>具有类似功能的还有<br>or 1=1–<br>or ‘a’=’a’</p>
@@ -107,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cip3su5350000g91q4cuj7dlz" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cip3syxqq0000hg1qkn6fxqvv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,7 +119,7 @@
   
   
     <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">python-文件与流-管式输出</div>
     </a>
   
@@ -149,7 +150,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
