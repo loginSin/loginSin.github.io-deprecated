@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS开发-响应者链条顺序 | loginSin&#39;s blog</title>
+  <title>loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发-响应者链条顺序">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/index.html">
+  <meta name="description" content="记录一下开发过程中遇到的问题">
+<meta property="og:type" content="website">
+<meta property="og:title" content="loginSin's blog">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/page/3/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
-<meta property="og:updated_time" content="2016-05-26T15:52:19.000Z">
+<meta property="og:description" content="记录一下开发过程中遇到的问题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发-响应者链条顺序">
-<meta name="twitter:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
+<meta name="twitter:title" content="loginSin's blog">
+<meta name="twitter:description" content="记录一下开发过程中遇到的问题">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -67,10 +66,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-响应者链条顺序" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-iOS开发-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" class="article-date">
-  <time datetime="2016-05-26T15:42:15.000Z" itemprop="datePublished">2016-05-26</time>
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" class="article-date">
+  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
   </div>
@@ -80,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      iOS开发-响应者链条顺序
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/">mac创建root用户</a>
     </h1>
   
 
@@ -89,40 +90,111 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1&gt;当APP启动以后创建UIApplication对象<br>2&gt;然后启动“消息循环”监听所有事件<br>3&gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件<br>4&gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象<br>5&gt;UIApplication对象再传递给UIWindow对象<br>6&gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewControlller）<br>7&gt;控制器再传递给控制器所管理的view<br>8&gt;控制器管理的view在其内部搜索本次触摸的店在哪个控件的范围内<br>9&gt;找到对应的控件以后（调用该空间的touchesXXX方法），再依次向上返回，最终返回给“消息循环”<br>10&gt;“消息循环”知道哪个空间被点击之后，再搜索该控件是否注册了对应的事件，如果注册了相应的事件，那么就会调用此点击事件</p>
+        <p>1.切换至root：su root，然后输入密码</p>
+<p>2.如果不存在root用户，输入：sudo passwd root</p>
+<p>在输入两次，root就创建成功了</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3su53y000dg91qz2wztm7i" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cip3su53m0007g91q4t5evvmg" class="article-share-link">Delen</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
-      <div class="article-nav-title">
-        
-          iOS开发-控件不能交互的原因
-        
-      </div>
-    </a>
-  
-  
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">iOS开发-MRC与ARC混编</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-iOS开发-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" class="article-date">
+  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/">mac显示隐藏文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cip3su53i0006g91q7tguw34w" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
   
 </article>
 
+
+  
+    <article id="post-iOS开发-mac关闭rootless" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" class="article-date">
+  <time datetime="2016-05-18T02:57:56.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/">mac关闭rootless</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果开始搞iOS逆向，首先安装class-dump的时候就会提示没有权限将class-dump放入usr/bin文件夹，原因是mac osx10.11之后使用了rootless技术，可以禁止root用户访问以下的路劲</p>
+<p>/System<br>/bin<br>/sbin<br>/usr (except /usr/local)</p>
+<p>但是，我们可以关闭rootless，来进行某些操作，建议非开发人员不要随意关闭rootless功能</p>
+<p>1.restart 电脑</p>
+<p>2.按command+r进入安全模式</p>
+<p>3.找到实用工具-&gt;终端，输入：</p>
+<p>csrutil disable #关闭rootless</p>
+<p>csrutil enable #开启rootless</p>
+<p>4.restart 电脑</p>
+<p>5.使用root来进行相关的操作，建议操作完成之后再把rootless开启</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cip3su53h0005g91qblbclos9" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/loginSin.github.io/page/2/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><a class="page-number" href="/loginSin.github.io/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 </section>
         
           <aside id="sidebar">

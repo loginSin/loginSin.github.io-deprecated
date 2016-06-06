@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,146 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-SQL注入-入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/" class="article-date">
+  <time datetime="2016-06-06T09:11:33.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SQL注入（sql injection）<br>本例以J2EE为例</p>
+<p>先讲一下我们登录的一般流程：<br>当我们使用浏览器进入某些网站输入账号密码登录的时候，<br>浏览器会通过GET或者POST请求（GET请求将账号密码放在在URL中，POST请求将账号密码放在请求体中）<br>将我们的账号密码发送给服务器（某些网站会对用户信息进行加密上传，而有些不会），<br>服务器接收到我们的账号密码之后就会形成一个条sql语句，从数据出查询是否存在该账号与密码<br>如果存在就会提示登录成功进入下一个界面，如果不存在那么就错误会提示账号密码错误</p>
+<p>那么我们说好的sql注入该怎么用？<br>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select * from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
+<p>接下来我们开始注入<br>“–”的注释作用<br>将上面的url添加一个“–”，这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123--&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123--&amp;password=123</a><br>我们会惊奇的发现也是登录成功，原因是服务器拿到数据之后拼接成的sql语句变成了<br>select <em> from user where account = 123– and password =123<br>因为“–”在sql语句中意思是注释掉后面的内容，所以上面的sql的真正表达是<br>select </em> from user where account = 123<br>意思是查找账号为123的用户是否存在，直接忽略掉了后半段的查找密码的过程</p>
+<p>“or 1=1”的作用<br>如果url这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123</a> or 1=1&amp;password=123<br>也会登录成功，sql语句变成了<br>select * from user where account = 123 or 1=1 and password =123<br>也会把后半段的验证密码给忽略掉</p>
+<p>具有类似功能的还有<br>or 1=1–<br>or ‘a’=’a’</p>
+<p>如果某些网站以上介绍的都不行，有可能是网站对sql注入进行了防范，可能需要进行一些特殊的处理<br>or 1=1<br>‘ or 1=1–<br>“ or 1=1–<br>‘ or ‘a’=’a’<br>“ or ‘a’=’a’<br>‘) or (‘a’=’a’<br>如果还不行，我建议还是换个，或者自己搭建一个服务器</p>
+<p>开发工具：eclipse Mars，MySql，tomcat（eclipse Mars自带的tomcat也行）<br>调试工具：随便来个浏览器就行<br>相关知识：servlet，java连接数据库，数据库查询，sql语句，GET/POST请求原理<br>相关知识有任何问题建议百度谷歌走一遭</p>
+<p>本人这方面也是小白，SQL注入的内容也是查看网上相关内容自学，有什么问题可以相互讨论</p>
+<p>服务端代码：<a href="https://github.com/loginSin/SQLInjectionServer">https://github.com/loginSin/SQLInjectionServer</a></p>
+<p>附录：<br>sql的注释有三种/<em>*/和–和#<br>1）/</em>需要和<em>/配对使用，不好控制</em>/是的位置，所以不常用<br>2）适用于Microsoft SQL Server，而MySql用–后面要加空格<br>当使用–后跟空格的时候，在url的转义为–%20<br>3）使用#来注释MySql</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cip3su5350000g91q4cuj7dlz" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python-文件与流-管式输出" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" class="article-date">
+  <time datetime="2016-06-01T16:08:07.000Z" itemprop="datePublished">2016-06-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/">python-文件与流-管式输出</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在UNIX的shell中（就像GNU bash）中，使用管道可以在一个命令后面续写其他的多个命令，eg：$cat file.txt | python pyScript.py | sort</p>
+<p>代码清单（pyScript.py）<br>import sys<br>text = sys.stdin.read()<br>words = text.split()<br>wordCount = len(words)<br>print(“len:”,wordCount)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cip3su549000kg91qe982yyn7" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python-文件和流-文件读写" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" class="article-date">
+  <time datetime="2016-06-01T15:55:14.000Z" itemprop="datePublished">2016-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#打开文件：<br>open(name[.mode[.buffering]])<br>open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的<br>eg:&gt;&gt; file = open(r”C:/file.txt”)</p>
+<p>#文件模式<br>r    读模式<br>w    写模式<br>a    追加模式<br>b    二进制模式（可添加到其他模式中使用）</p>
+<ul>
+<li>读/写模式（可添加到其他模式中使用）</li>
+</ul>
+<p>注：在UNIX中换行符是\n，而在windows中是\r\n，python会对此进行自动的转换</p>
+<p>#读与写<br>文件的读写需要使用write和read方法（以字符串形式进行读写）<br>写eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”w”)<br>f.write(“hello “)<br>f.write(“world !”)<br>f.close()</p>
+</blockquote>
+</blockquote>
+<p>读eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”r”)<br>f.read(4)<br>‘hell’<br>f.read()<br>‘0 world !’</p>
+</blockquote>
+</blockquote>
+<p>详情请见：<br>Magnus Lie Hetland 《Python基础教程》（第2版.修订版）207~209</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cip3su54b000mg91qm8ibsws0" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-iOS开发-NULL-nil-Nil-NSNULL区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="ciotfkitl0003u71qo2n4rizz" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cip3su53a0001g91q4657qiwe" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -132,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="ciotfkiuv000hu71q7mje9ljs" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cip3su545000ig91qo32gpxf8" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -169,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="ciotfkiua000bu71qn5lv4rh7" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3su53y000dg91qz2wztm7i" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -207,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="ciotfkiti0002u71qlg5zasrv" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cip3su53c0002g91qk1aes63i" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -244,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="ciotfkit80000u71qry8rvo13" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cip3su53e0003g91q3lgw4h80" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -254,9 +394,50 @@
 
 
   
-    <article id="post-iOS开发-CocoaPods相关" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-iOS开发-新版CocoaPods相关" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/" class="article-date">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" class="article-date">
+  <time datetime="2016-05-26T15:33:50.000Z" itemprop="datePublished">2016-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/">iOS开发-CocoaPods相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>换了新电脑之后发现无法正常使用cocoapods了，所以查了一下，果然发生了一些变化，所以记录一下</p>
+<p>旧版与新版最大的区别是Podfile文件编写的格式<br>下载的格式为：<br>platform :ios, ‘7.0’<br>use_frameworks!<br>xcodeproj ‘path/to/Test.xcodeproj’ #需要手动指定项目的路径</p>
+<p>target ‘Test’ do<br>  pod ‘AFNetworking’, ‘~&gt; 3.0.0’<br>end</p>
+<p>变化较大的是需要手动指定项目路径，<br>pod的格式也放生变化，其中的‘Test’指的是项目的名称</p>
+<p>cocoapods官网地址<br><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cip3su543000hg91q8w58y3z0" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发-旧版CocoaPods相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" class="article-date">
   <time datetime="2016-05-26T15:33:47.000Z" itemprop="datePublished">2016-05-26</time>
 </a>
     
@@ -268,7 +449,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/">iOS开发-CocoaPods相关</a>
+      <a class="article-title" href="/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/">iOS开发-CocoaPods相关</a>
     </h1>
   
 
@@ -282,11 +463,11 @@
 <p>完成以上四步CocoaPod安装成功</p>
 <p>新建一个工程，创建一个empty文件</p>
 <p>文件名必须为Podfile，不能改别的名字</p>
-<p>#pod ‘AFNetworking’,’2.6.0’    固定版本2.6.0</p>
-<p>#pod ‘AFNetworking’,’~&gt;2.6.0’  引入大于2.6.0的版本的AFNetworking</p>
-<p>#pod ‘AFNetworking’,’~&lt;2.6.0’  引入小于2.6.0的版本的AFNetworking</p>
-<p>#pod install 执行装载三方库(先更新本地镜像地址  然后下载最新的三方库到我们的工程 )</p>
-<p>#pod update  执行 先更新本地镜像地址 再更新三方库</p>
+<p>pod ‘AFNetworking’,’2.6.0’    固定版本2.6.0</p>
+<p>pod ‘AFNetworking’,’~&gt;2.6.0’  引入大于2.6.0的版本的AFNetworking</p>
+<p>pod ‘AFNetworking’,’~&lt;2.6.0’  引入小于2.6.0的版本的AFNetworking</p>
+<p>$pod install 执行装载三方库(先更新本地镜像地址  然后下载最新的三方库到我们的工程 )</p>
+<p>$pod update  执行 先更新本地镜像地址 再更新三方库</p>
 <p>使用CocoaPods需要创建一个Podfile文件<br>(1)Podfile配置如下</p>
 <p>#平台 ios版本</p>
 <p>platform:’ios’,’7.0’</p>
@@ -300,302 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods相关/" data-id="ciotfkitf0001u71q3k45fyfw" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-调试相关的宏" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" class="article-date">
-  <time datetime="2016-05-18T09:03:11.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/">iOS开发-调试相关的宏</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、debug模式下NSLog打印，release模式下不打印(将下面代码写到.h文件中，那个.m代码需要debug下打印就导入头文件，如果整个项目都需要这样做，那就将下面代码放入pch文件中)<br>//重写NSLog,Debug模式下打印日志和当前行数</p>
-<p>#if DEBUG</p>
-<p>#define NSLog(FORMAT, …) fprintf(stderr,”\nfunction:%s line:%d content:%s\n”, <strong>FUNCTION</strong>, <strong>LINE</strong>, [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String]);</p>
-<p>#else</p>
-<p>#define NSLog(FORMAT, …) nil</p>
-<p>#endif</p>
-<p>另一个版本</p>
-<p>#ifdef DEBUG</p>
-<p>#define NSLog(FORMAT, …) fprintf(stderr,”%s:%d\t%s\n”,[[[NSString stringWithUTF8String:<strong>FILE</strong>] lastPathComponent] UTF8String], <strong>LINE</strong>, [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String]);</p>
-<p>#else</p>
-<p>#define NSLog(…)</p>
-<p>#endif</p>
-<p>//它会输出文件名，和打印的具体行号<br>DealItemCell.m:307    cell的高度258.684998</p>
-<p>第三个版本(如果是release版本，什么都不打印)</p>
-<p>#if RELEASE</p>
-<p>#define NSLog(FORMAT, …) nil</p>
-<p>#endif</p>
-<p>最简单的版本(针对三方库，模拟器下打印信息)</p>
-<p>#if TARGET_IPHONE_SIMULATOR//模拟器</p>
-<p>#elif TARGET_OS_IPHONE//真机</p>
-<p>#define NSLog(FORMAT, …) nil</p>
-<p>#endif</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="ciotfkiul000gu71qoj07dyyl" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-SQLite设置主键" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" class="article-date">
-  <time datetime="2016-05-18T08:53:05.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/">iOS开发-SQLite设置主键</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SQLite命令大全：<br><a href="http://www.runoob.com/sqlite/sqlite-alter-command.html" target="_blank" rel="external">http://www.runoob.com/sqlite/sqlite-alter-command.html</a></p>
-<p>如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。</p>
-<p>sqlite3.5确实没有alter table t drop constraint <em>, alter table t add constraint primary key </em>的用法</p>
-<p>不过，也有解决方案，不会有太大的影响</p>
-<p>解决思路是：</p>
-<p>建新表–&gt;旧表数据复制进新表–&gt;删旧表–&gt;新表重命名为旧表的名称<br>//原始的表结构</p>
-<p>1.NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;</p>
-<p>//新的表结构</p>
-<p>2.NSString *sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;</p>
-<p>//将旧表数据复制进新表</p>
-<p>3.NSString <em>sqlUpdateAllData = @”insert into EmpListNew select </em> from EmpList”;</p>
-<p>//删除旧表</p>
-<p>4.NSString *sqlDropOldTable = @”drop table EmpList”;</p>
-<p>//把新表命名为旧表</p>
-<p>5.NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
-<p>使用FMDB来执行上面的sql语句既可以了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="ciotfkitu0005u71qpbkbjgi5" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-使用FMDB进行数据库版本更新" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" class="article-date">
-  <time datetime="2016-05-18T08:51:34.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/">iOS开发-使用FMDB进行数据库版本更新</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#import “DEarDatabaseManager.h”</p>
-<p>#import “FMDatabase.h”</p>
-<p>#import “DEarSandbox.h”</p>
-<p>static NSString *dbVersionKey = @”dbVersionKey”;</p>
-<p>//数据库2.0版本变更<br>//创建新表，包含主键<br>static NSString <em>sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;<br>//将旧表数据复制进新表<br>static NSString </em>sqlUpdateAllData = @”insert into EmpListNew select <em> from EmpList”;<br>//删除旧表<br>static NSString </em>sqlDropOldTable = @”drop table EmpList”;<br>//新表重命名为旧表的名称<br>static NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
-<p>@interface DEarDatabaseManager ()<br>{<br>    FMDatabase *_database;<br>}<br>@end</p>
-<p>@implementation DEarDatabaseManager</p>
-<p>+(instancetype)sharedInstance<br>{<br>    static dispatch_once_t onceToken;<br>    static DEarDatabaseManager *manager;</p>
-<pre><code>dispatch_once(&amp;onceToken, ^{
-    manager = [[DEarDatabaseManager alloc] init];
-});
-
-return manager;
-</code></pre><p>}</p>
-<ul>
-<li>(instancetype)init<br>{<br>  self = [super init];<br>  if (self) {<pre><code>[self configDatabase];
-</code></pre>  }<br>  return self;<br>}</li>
-</ul>
-<p>-(void)configDatabase<br>{<br>    int dbVersion = 1;<br>    NSString *path = [DEarSandbox documentPath:@”dEar.sqlite”];</p>
-<pre><code>_database = [[FMDatabase alloc] initWithPath:path];
-if (!_database.open)
-{
-    NSLog(@&quot;打开失败&quot;);
-    return;
-}
-//如果数据库存在
-if([self isExistDBWithPath:path]){
-    //获取数据库版本号
-    NSString *currentDBVersion = [self p_getCurrentDBVersion];
-    //如果数据库版本号不存在，表示当前刚把数据库创建出来，那么默认数据库的版本号为1
-    if(!currentDBVersion) {
-        currentDBVersion = @&quot;1&quot;;
-    }
-    dbVersion = [currentDBVersion intValue];
-}
-//数据库的版本更新功能，主要就是这个switch
-switch (dbVersion) {
-    case 1:
-    {
-        //创建初始的数据表
-        [self p_createDBWithPath];
-        [self p_setCurrentDBVersion:@&quot;2&quot;];
-    }
-    case 2:
-    {
-        //更新数据表，因为之前的数据表并没有主键，有重复添加员工信息的bug
-        //解决思路是：创建新表，旧表数据复制进新表，删除旧表，新表重命名为旧表的名称
-        [_database executeUpdate:sqlCreateNewTableFor2];
-        [_database executeUpdate:sqlUpdateAllData];
-        [_database executeUpdate:sqlDropOldTable];
-        [_database executeUpdate:sqlRenameTalbe];
-        [self p_setCurrentDBVersion:@&quot;3&quot;];
-    }
-    default:
-        break;
-}
-</code></pre><p>}</p>
-<ul>
-<li><p>(void)p_createDBWithPath{</p>
-<p>  NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;<br>  BOOL result1 = [_database executeUpdate:sql1];<br>  if (!result1)<br>  {</p>
-<pre><code>NSLog(@&quot;创建表EmpList失败！&quot;);
-return;
-</code></pre><p>  }<br>  NSLog(@”创建表EmpList成功！”);<br>}</p>
-</li>
-</ul>
-<p>-(void)addEmpWithEmpName:(NSString <em>)empName deptName:(NSString </em>)deptName companyName:(NSString <em>)companyName empNumber:(NSString </em>)empNumber phone:(NSString *)phone completion:(void (^)(BOOL finished))completion<br>{</p>
-<pre><code>NSString *sql = @&quot;INSERT INTO EmpList (empName, deptName, companyName, empNumber, phone) VALUES (?, ?, ?, ?, ?)&quot;;
-BOOL result = [_database executeUpdate:sql, empName, deptName, companyName, empNumber, phone];
-if (!result)
-{
-    if(completion){
-        NSLog(@&quot;添加声纹失败！&quot;);
-        completion(NO);
-        return;
-    }
-
-}
-NSLog(@&quot;添加声纹成功！&quot;);
-if (completion)
-{
-    completion(YES);
-    return;
-}
-</code></pre><p>}</p>
-<p>-(void)deleteEmpWithActionType:(DEarActionType <em>)action completion:(void (^)(BOOL finished))completion<br>{<br>    NSString </em>sql = @”Delete from EmpList where empName = ?”;<br>    BOOL result = [_database executeUpdate:sql, action.empName];<br>    if (!result)<br>    {<br>        NSLog(@”删除声纹失败！”);<br>        return;<br>    }<br>    NSLog(@”删除声纹成功！”);<br>    if (completion)<br>    {<br>        completion(YES);<br>    }<br>}</p>
-<p>-(NSArray <em>)allEmps<br>{<br>    NSMutableArray </em>marr = [[NSMutableArray alloc] init];<br>    NSString <em>sql = @”select </em> from EmpList”;<br>    FMResultSet <em>result = [_database executeQuery:sql];<br>    while ([result next])<br>    {<br>        DEarActionType </em>action = [[DEarActionType alloc] init];<br>        action.empName = [result stringForColumn:@”empName”];<br>        action.deptName = [result stringForColumn:@”deptName”];<br>        action.companyName = [result stringForColumn:@”companyName”];<br>        action.empNumber = [result stringForColumn:@”empNumber”];<br>        action.phone = [result stringForColumn:@”phone”];<br>        [marr addObject:action];<br>    }<br>    return marr;<br>}</p>
-<ul>
-<li><p>(BOOL)isExistDBWithPath:(NSString *)path {<br>  return [DEarSandbox fileExists:path];<br>}</p>
-</li>
-<li><p>(void)p_setCurrentDBVersion:(NSString *)dbVersion {<br>  [[NSUserDefaults standardUserDefaults] setValue:dbVersion forKey:dbVersionKey];<br>}</p>
-</li>
-<li><p>(NSString *)p_getCurrentDBVersion {</p>
-<p>  return [[NSUserDefaults standardUserDefaults] valueForKey:dbVersionKey];<br>}</p>
-</li>
-</ul>
-<p>@end</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="ciotfkitv0006u71qmjt2xmsm" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-使用宏精简代码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" class="article-date">
-  <time datetime="2016-05-18T08:17:15.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/">使用宏精简代码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit</p>
-<p>//set方法将其宏定义</p>
-<p>#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>[userDefaluts setValue:argv1 forKey:argv2];</p>
-<p>//get方法将其宏定义</p>
-<p>#define USERDEFAULT_GET(argv) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>return [userDefaluts valueForKey:argv];</p>
-<p>static NSString <em>userNameKey = @”TVUserName”;<br>static NSString </em>userPassKey = @”TVUserPass”;<br>static NSString *userGenderKey = @”TVUserGender”;</p>
-<p>@implementation TVModelManager</p>
-<ul>
-<li>(void)setUserName:(NSString *)userName {<br>  USERDEFAULT_SET(userName,userNameKey);<br>}</li>
-<li>(NSString *)getUserName {<br>  USERDEFAULT_GET(userNameKey);<br>}</li>
-<li>(void)setUserPass:(NSString *)userPass {<br>  USERDEFAULT_SET(userPass, userPassKey);<br>}</li>
-<li>(NSString *)getUserPass {<br>  USERDEFAULT_GET(userPassKey);<br>}</li>
-<li>(void)setUserGender:(BOOL)gender {<br>  NSString *sex = gender ? @”male”:@”female”;<br>  USERDEFAULT_SET(sex, userGenderKey);<br>}</li>
-<li>(NSString *)getUserGender {<br>  USERDEFAULT_GET(userGenderKey);<br>}</li>
-</ul>
-<p>#undef USERDEFAULT_GET</p>
-<p>#undef USERDEFAULT_SET</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="ciotfkiu50009u71qgegwo0hu" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cip3su542000gg91qflmzcg4h" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -608,7 +494,7 @@ if (completion)
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/loginSin.github.io/page/2/">2</a><a class="extend next" rel="next" href="/loginSin.github.io/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/loginSin.github.io/page/2/">2</a><a class="page-number" href="/loginSin.github.io/page/3/">3</a><a class="extend next" rel="next" href="/loginSin.github.io/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -625,16 +511,28 @@ if (completion)
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">19</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/">python-文件与流-管式输出</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/">iOS开发-NULL/nil/Nil/NSNULL区别</a>
@@ -642,18 +540,6 @@ if (completion)
         
           <li>
             <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/">iOS开发-控件不能交互的原因</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/">iOS开发-响应者链条顺序</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/">iOS开发-MRC与ARC混编</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/">iOS开发-CocoaPods更新慢</a>
           </li>
         
       </ul>
@@ -669,7 +555,7 @@ if (completion)
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 loginSin<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

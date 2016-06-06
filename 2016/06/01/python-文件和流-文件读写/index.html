@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS开发-响应者链条顺序 | loginSin&#39;s blog</title>
+  <title>python-文件和流-1 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
+  <meta name="description" content="#打开文件：open(name[.mode[.buffering]])open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的eg:&amp;gt;&amp;gt; file = open(r”C:/file.txt”)
+#文件模式r    读模式w    写模式a    追加模式b    二进制模式（可添加到其他模式中使用）
+
+读/写模式（可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发-响应者链条顺序">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/index.html">
+<meta property="og:title" content="python-文件和流-1">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/01/python-文件和流-文件读写/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
-<meta property="og:updated_time" content="2016-05-26T15:52:19.000Z">
+<meta property="og:description" content="#打开文件：open(name[.mode[.buffering]])open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的eg:&amp;gt;&amp;gt; file = open(r”C:/file.txt”)
+#文件模式r    读模式w    写模式a    追加模式b    二进制模式（可添加到其他模式中使用）
+
+读/写模式（可">
+<meta property="og:updated_time" content="2016-06-01T16:10:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发-响应者链条顺序">
-<meta name="twitter:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
+<meta name="twitter:title" content="python-文件和流-1">
+<meta name="twitter:description" content="#打开文件：open(name[.mode[.buffering]])open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的eg:&amp;gt;&amp;gt; file = open(r”C:/file.txt”)
+#文件模式r    读模式w    写模式a    追加模式b    二进制模式（可添加到其他模式中使用）
+
+读/写模式（可">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -67,10 +76,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-响应者链条顺序" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-python-文件和流-文件读写" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" class="article-date">
-  <time datetime="2016-05-26T15:42:15.000Z" itemprop="datePublished">2016-05-26</time>
+    <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" class="article-date">
+  <time datetime="2016-06-01T15:55:14.000Z" itemprop="datePublished">2016-06-01</time>
 </a>
     
   </div>
@@ -81,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS开发-响应者链条顺序
+      python-文件和流-1
     </h1>
   
 
@@ -89,12 +98,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1&gt;当APP启动以后创建UIApplication对象<br>2&gt;然后启动“消息循环”监听所有事件<br>3&gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件<br>4&gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象<br>5&gt;UIApplication对象再传递给UIWindow对象<br>6&gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewControlller）<br>7&gt;控制器再传递给控制器所管理的view<br>8&gt;控制器管理的view在其内部搜索本次触摸的店在哪个控件的范围内<br>9&gt;找到对应的控件以后（调用该空间的touchesXXX方法），再依次向上返回，最终返回给“消息循环”<br>10&gt;“消息循环”知道哪个空间被点击之后，再搜索该控件是否注册了对应的事件，如果注册了相应的事件，那么就会调用此点击事件</p>
+        <p>#打开文件：<br>open(name[.mode[.buffering]])<br>open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的<br>eg:&gt;&gt; file = open(r”C:/file.txt”)</p>
+<p>#文件模式<br>r    读模式<br>w    写模式<br>a    追加模式<br>b    二进制模式（可添加到其他模式中使用）</p>
+<ul>
+<li>读/写模式（可添加到其他模式中使用）</li>
+</ul>
+<p>注：在UNIX中换行符是\n，而在windows中是\r\n，python会对此进行自动的转换</p>
+<p>#读与写<br>文件的读写需要使用write和read方法（以字符串形式进行读写）<br>写eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”w”)<br>f.write(“hello “)<br>f.write(“world !”)<br>f.close()</p>
+</blockquote>
+</blockquote>
+<p>读eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”r”)<br>f.read(4)<br>‘hell’<br>f.read()<br>‘0 world !’</p>
+</blockquote>
+</blockquote>
+<p>详情请见：<br>Magnus Lie Hetland 《Python基础教程》（第2版.修订版）207~209</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3su53y000dg91qz2wztm7i" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cip3su54b000mg91qm8ibsws0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -103,19 +130,19 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
-          iOS开发-控件不能交互的原因
+          python-文件与流-管式输出
         
       </div>
     </a>
   
   
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">iOS开发-MRC与ARC混编</div>
+      <div class="article-nav-title">iOS开发-NULL/nil/Nil/NSNULL区别</div>
     </a>
   
 </nav>

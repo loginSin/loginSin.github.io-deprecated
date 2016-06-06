@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,301 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-iOS开发-调试相关的宏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" class="article-date">
+  <time datetime="2016-05-18T09:03:11.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/">iOS开发-调试相关的宏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、debug模式下NSLog打印，release模式下不打印(将下面代码写到.h文件中，那个.m代码需要debug下打印就导入头文件，如果整个项目都需要这样做，那就将下面代码放入pch文件中)<br>//重写NSLog,Debug模式下打印日志和当前行数</p>
+<p>#if DEBUG</p>
+<p>#define NSLog(FORMAT, …) fprintf(stderr,”\nfunction:%s line:%d content:%s\n”, <strong>FUNCTION</strong>, <strong>LINE</strong>, [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String]);</p>
+<p>#else</p>
+<p>#define NSLog(FORMAT, …) nil</p>
+<p>#endif</p>
+<p>另一个版本</p>
+<p>#ifdef DEBUG</p>
+<p>#define NSLog(FORMAT, …) fprintf(stderr,”%s:%d\t%s\n”,[[[NSString stringWithUTF8String:<strong>FILE</strong>] lastPathComponent] UTF8String], <strong>LINE</strong>, [[NSString stringWithFormat:FORMAT, ##<strong>VA_ARGS</strong>] UTF8String]);</p>
+<p>#else</p>
+<p>#define NSLog(…)</p>
+<p>#endif</p>
+<p>//它会输出文件名，和打印的具体行号<br>DealItemCell.m:307    cell的高度258.684998</p>
+<p>第三个版本(如果是release版本，什么都不打印)</p>
+<p>#if RELEASE</p>
+<p>#define NSLog(FORMAT, …) nil</p>
+<p>#endif</p>
+<p>最简单的版本(针对三方库，模拟器下打印信息)</p>
+<p>#if TARGET_IPHONE_SIMULATOR//模拟器</p>
+<p>#elif TARGET_OS_IPHONE//真机</p>
+<p>#define NSLog(FORMAT, …) nil</p>
+<p>#endif</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="cip3su54a000lg91qexoje86w" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发-SQLite设置主键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" class="article-date">
+  <time datetime="2016-05-18T08:53:05.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/">iOS开发-SQLite设置主键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SQLite命令大全：<br><a href="http://www.runoob.com/sqlite/sqlite-alter-command.html" target="_blank" rel="external">http://www.runoob.com/sqlite/sqlite-alter-command.html</a></p>
+<p>如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。</p>
+<p>sqlite3.5确实没有alter table t drop constraint <em>, alter table t add constraint primary key </em>的用法</p>
+<p>不过，也有解决方案，不会有太大的影响</p>
+<p>解决思路是：</p>
+<p>建新表–&gt;旧表数据复制进新表–&gt;删旧表–&gt;新表重命名为旧表的名称<br>//原始的表结构</p>
+<p>1.NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;</p>
+<p>//新的表结构</p>
+<p>2.NSString *sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;</p>
+<p>//将旧表数据复制进新表</p>
+<p>3.NSString <em>sqlUpdateAllData = @”insert into EmpListNew select </em> from EmpList”;</p>
+<p>//删除旧表</p>
+<p>4.NSString *sqlDropOldTable = @”drop table EmpList”;</p>
+<p>//把新表命名为旧表</p>
+<p>5.NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
+<p>使用FMDB来执行上面的sql语句既可以了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="cip3su53f0004g91qrtlsds52" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发-使用FMDB进行数据库版本更新" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" class="article-date">
+  <time datetime="2016-05-18T08:51:34.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/">iOS开发-使用FMDB进行数据库版本更新</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#import “DEarDatabaseManager.h”</p>
+<p>#import “FMDatabase.h”</p>
+<p>#import “DEarSandbox.h”</p>
+<p>static NSString *dbVersionKey = @”dbVersionKey”;</p>
+<p>//数据库2.0版本变更<br>//创建新表，包含主键<br>static NSString <em>sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;<br>//将旧表数据复制进新表<br>static NSString </em>sqlUpdateAllData = @”insert into EmpListNew select <em> from EmpList”;<br>//删除旧表<br>static NSString </em>sqlDropOldTable = @”drop table EmpList”;<br>//新表重命名为旧表的名称<br>static NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
+<p>@interface DEarDatabaseManager ()<br>{<br>    FMDatabase *_database;<br>}<br>@end</p>
+<p>@implementation DEarDatabaseManager</p>
+<p>+(instancetype)sharedInstance<br>{<br>    static dispatch_once_t onceToken;<br>    static DEarDatabaseManager *manager;</p>
+<pre><code>dispatch_once(&amp;onceToken, ^{
+    manager = [[DEarDatabaseManager alloc] init];
+});
+
+return manager;
+</code></pre><p>}</p>
+<ul>
+<li>(instancetype)init<br>{<br>  self = [super init];<br>  if (self) {<pre><code>[self configDatabase];
+</code></pre>  }<br>  return self;<br>}</li>
+</ul>
+<p>-(void)configDatabase<br>{<br>    int dbVersion = 1;<br>    NSString *path = [DEarSandbox documentPath:@”dEar.sqlite”];</p>
+<pre><code>_database = [[FMDatabase alloc] initWithPath:path];
+if (!_database.open)
+{
+    NSLog(@&quot;打开失败&quot;);
+    return;
+}
+//如果数据库存在
+if([self isExistDBWithPath:path]){
+    //获取数据库版本号
+    NSString *currentDBVersion = [self p_getCurrentDBVersion];
+    //如果数据库版本号不存在，表示当前刚把数据库创建出来，那么默认数据库的版本号为1
+    if(!currentDBVersion) {
+        currentDBVersion = @&quot;1&quot;;
+    }
+    dbVersion = [currentDBVersion intValue];
+}
+//数据库的版本更新功能，主要就是这个switch
+switch (dbVersion) {
+    case 1:
+    {
+        //创建初始的数据表
+        [self p_createDBWithPath];
+        [self p_setCurrentDBVersion:@&quot;2&quot;];
+    }
+    case 2:
+    {
+        //更新数据表，因为之前的数据表并没有主键，有重复添加员工信息的bug
+        //解决思路是：创建新表，旧表数据复制进新表，删除旧表，新表重命名为旧表的名称
+        [_database executeUpdate:sqlCreateNewTableFor2];
+        [_database executeUpdate:sqlUpdateAllData];
+        [_database executeUpdate:sqlDropOldTable];
+        [_database executeUpdate:sqlRenameTalbe];
+        [self p_setCurrentDBVersion:@&quot;3&quot;];
+    }
+    default:
+        break;
+}
+</code></pre><p>}</p>
+<ul>
+<li><p>(void)p_createDBWithPath{</p>
+<p>  NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;<br>  BOOL result1 = [_database executeUpdate:sql1];<br>  if (!result1)<br>  {</p>
+<pre><code>NSLog(@&quot;创建表EmpList失败！&quot;);
+return;
+</code></pre><p>  }<br>  NSLog(@”创建表EmpList成功！”);<br>}</p>
+</li>
+</ul>
+<p>-(void)addEmpWithEmpName:(NSString <em>)empName deptName:(NSString </em>)deptName companyName:(NSString <em>)companyName empNumber:(NSString </em>)empNumber phone:(NSString *)phone completion:(void (^)(BOOL finished))completion<br>{</p>
+<pre><code>NSString *sql = @&quot;INSERT INTO EmpList (empName, deptName, companyName, empNumber, phone) VALUES (?, ?, ?, ?, ?)&quot;;
+BOOL result = [_database executeUpdate:sql, empName, deptName, companyName, empNumber, phone];
+if (!result)
+{
+    if(completion){
+        NSLog(@&quot;添加声纹失败！&quot;);
+        completion(NO);
+        return;
+    }
+
+}
+NSLog(@&quot;添加声纹成功！&quot;);
+if (completion)
+{
+    completion(YES);
+    return;
+}
+</code></pre><p>}</p>
+<p>-(void)deleteEmpWithActionType:(DEarActionType <em>)action completion:(void (^)(BOOL finished))completion<br>{<br>    NSString </em>sql = @”Delete from EmpList where empName = ?”;<br>    BOOL result = [_database executeUpdate:sql, action.empName];<br>    if (!result)<br>    {<br>        NSLog(@”删除声纹失败！”);<br>        return;<br>    }<br>    NSLog(@”删除声纹成功！”);<br>    if (completion)<br>    {<br>        completion(YES);<br>    }<br>}</p>
+<p>-(NSArray <em>)allEmps<br>{<br>    NSMutableArray </em>marr = [[NSMutableArray alloc] init];<br>    NSString <em>sql = @”select </em> from EmpList”;<br>    FMResultSet <em>result = [_database executeQuery:sql];<br>    while ([result next])<br>    {<br>        DEarActionType </em>action = [[DEarActionType alloc] init];<br>        action.empName = [result stringForColumn:@”empName”];<br>        action.deptName = [result stringForColumn:@”deptName”];<br>        action.companyName = [result stringForColumn:@”companyName”];<br>        action.empNumber = [result stringForColumn:@”empNumber”];<br>        action.phone = [result stringForColumn:@”phone”];<br>        [marr addObject:action];<br>    }<br>    return marr;<br>}</p>
+<ul>
+<li><p>(BOOL)isExistDBWithPath:(NSString *)path {<br>  return [DEarSandbox fileExists:path];<br>}</p>
+</li>
+<li><p>(void)p_setCurrentDBVersion:(NSString *)dbVersion {<br>  [[NSUserDefaults standardUserDefaults] setValue:dbVersion forKey:dbVersionKey];<br>}</p>
+</li>
+<li><p>(NSString *)p_getCurrentDBVersion {</p>
+<p>  return [[NSUserDefaults standardUserDefaults] valueForKey:dbVersionKey];<br>}</p>
+</li>
+</ul>
+<p>@end</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="cip3su53x000cg91q8nrnbzzv" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发-使用宏精简代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" class="article-date">
+  <time datetime="2016-05-18T08:17:15.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/">使用宏精简代码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果有大量重复的代码，完全可以使用宏定义减少部分代码，源自YYKit</p>
+<p>//set方法将其宏定义</p>
+<p>#define USERDEFAULT_SET(argv1,argv2) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>[userDefaluts setValue:argv1 forKey:argv2];</p>
+<p>//get方法将其宏定义</p>
+<p>#define USERDEFAULT_GET(argv) NSUserDefaults *userDefaluts = [NSUserDefaults standardUserDefaults];\<br>return [userDefaluts valueForKey:argv];</p>
+<p>static NSString <em>userNameKey = @”TVUserName”;<br>static NSString </em>userPassKey = @”TVUserPass”;<br>static NSString *userGenderKey = @”TVUserGender”;</p>
+<p>@implementation TVModelManager</p>
+<ul>
+<li>(void)setUserName:(NSString *)userName {<br>  USERDEFAULT_SET(userName,userNameKey);<br>}</li>
+<li>(NSString *)getUserName {<br>  USERDEFAULT_GET(userNameKey);<br>}</li>
+<li>(void)setUserPass:(NSString *)userPass {<br>  USERDEFAULT_SET(userPass, userPassKey);<br>}</li>
+<li>(NSString *)getUserPass {<br>  USERDEFAULT_GET(userPassKey);<br>}</li>
+<li>(void)setUserGender:(BOOL)gender {<br>  NSString *sex = gender ? @”male”:@”female”;<br>  USERDEFAULT_SET(sex, userGenderKey);<br>}</li>
+<li>(NSString *)getUserGender {<br>  USERDEFAULT_GET(userGenderKey);<br>}</li>
+</ul>
+<p>#undef USERDEFAULT_GET</p>
+<p>#undef USERDEFAULT_SET</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="cip3su53s0009g91qmhx6usxq" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-iOS开发-使用的一些宏" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -118,7 +413,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="ciotfkiu00008u71qzzi6xawi" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cip3su53n0008g91qke8hqyzv" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -157,7 +452,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="ciotfkiui000fu71q2iu0o7ra" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="cip3su541000fg91qrwrd6ufs" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -197,7 +492,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="ciotfkiub000cu71qpgxmc6m7" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="cip3su53w000bg91q2rqhh0y1" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -274,7 +569,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="ciotfkitx0007u71qp449a7yj" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="cip3su53t000ag91qkp1r89d9" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -322,7 +617,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="ciotfkiux000iu71q5qssylha" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cip3su547000jg91qxkxbl5an" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -384,129 +679,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="ciotfkiu8000au71qtii7m3yj" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" class="article-date">
-  <time datetime="2016-05-18T03:18:10.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/">mac创建root用户</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.切换至root：su root，然后输入密码</p>
-<p>2.如果不存在root用户，输入：sudo passwd root</p>
-<p>在输入两次，root就创建成功了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="ciotfkiug000eu71qmtt78i7t" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" class="article-date">
-  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/">mac显示隐藏文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="ciotfkiue000du71qzp7vvo7f" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-mac关闭rootless" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" class="article-date">
-  <time datetime="2016-05-18T02:57:56.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/">mac关闭rootless</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果开始搞iOS逆向，首先安装class-dump的时候就会提示没有权限将class-dump放入usr/bin文件夹，原因是mac osx10.11之后使用了rootless技术，可以禁止root用户访问以下的路劲</p>
-<p>/System<br>/bin<br>/sbin<br>/usr (except /usr/local)</p>
-<p>但是，我们可以关闭rootless，来进行某些操作，建议非开发人员不要随意关闭rootless功能</p>
-<p>1.restart 电脑</p>
-<p>2.按command+r进入安全模式</p>
-<p>3.找到实用工具-&gt;终端，输入：</p>
-<p>csrutil disable #关闭rootless</p>
-<p>csrutil enable #开启rootless</p>
-<p>4.restart 电脑</p>
-<p>5.使用root来进行相关的操作，建议操作完成之后再把rootless开启</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="ciotfkitp0004u71qsmp195w9" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cip3su53z000eg91q58hbcu6g" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -519,7 +692,7 @@ void TFLog(NSString *format, ...);
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/loginSin.github.io/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/loginSin.github.io/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/loginSin.github.io/page/3/">3</a><a class="extend next" rel="next" href="/loginSin.github.io/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -536,16 +709,28 @@ void TFLog(NSString *format, ...);
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">19</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/">python-文件与流-管式输出</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/">iOS开发-NULL/nil/Nil/NSNULL区别</a>
@@ -553,18 +738,6 @@ void TFLog(NSString *format, ...);
         
           <li>
             <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/">iOS开发-控件不能交互的原因</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/">iOS开发-响应者链条顺序</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/">iOS开发-MRC与ARC混编</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/">iOS开发-CocoaPods更新慢</a>
           </li>
         
       </ul>
@@ -580,7 +753,7 @@ void TFLog(NSString *format, ...);
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 loginSin<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS开发-响应者链条顺序 | loginSin&#39;s blog</title>
+  <title>iOS开发-CocoaPods相关 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
+  <meta name="description" content="换了新电脑之后发现无法正常使用cocoapods了，所以查了一下，果然发生了一些变化，所以记录一下
+旧版与新版最大的区别是Podfile文件编写的格式下载的格式为：platform :ios, ‘7.0’use_frameworks!xcodeproj ‘path/to/Test.xcodeproj’ #需要手动指定项目的路径
+target ‘Test’ do  pod ‘AFNetworking">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发-响应者链条顺序">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/index.html">
+<meta property="og:title" content="iOS开发-CocoaPods相关">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
-<meta property="og:updated_time" content="2016-05-26T15:52:19.000Z">
+<meta property="og:description" content="换了新电脑之后发现无法正常使用cocoapods了，所以查了一下，果然发生了一些变化，所以记录一下
+旧版与新版最大的区别是Podfile文件编写的格式下载的格式为：platform :ios, ‘7.0’use_frameworks!xcodeproj ‘path/to/Test.xcodeproj’ #需要手动指定项目的路径
+target ‘Test’ do  pod ‘AFNetworking">
+<meta property="og:updated_time" content="2016-05-30T03:29:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发-响应者链条顺序">
-<meta name="twitter:description" content="1&amp;gt;当APP启动以后创建UIApplication对象2&amp;gt;然后启动“消息循环”监听所有事件3&amp;gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件4&amp;gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象5&amp;gt;UIApplication对象再传递给UIWindow对象6&amp;gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewCon">
+<meta name="twitter:title" content="iOS开发-CocoaPods相关">
+<meta name="twitter:description" content="换了新电脑之后发现无法正常使用cocoapods了，所以查了一下，果然发生了一些变化，所以记录一下
+旧版与新版最大的区别是Podfile文件编写的格式下载的格式为：platform :ios, ‘7.0’use_frameworks!xcodeproj ‘path/to/Test.xcodeproj’ #需要手动指定项目的路径
+target ‘Test’ do  pod ‘AFNetworking">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
   
@@ -67,10 +73,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-响应者链条顺序" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-iOS开发-新版CocoaPods相关" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" class="article-date">
-  <time datetime="2016-05-26T15:42:15.000Z" itemprop="datePublished">2016-05-26</time>
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" class="article-date">
+  <time datetime="2016-05-26T15:33:50.000Z" itemprop="datePublished">2016-05-26</time>
 </a>
     
   </div>
@@ -81,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS开发-响应者链条顺序
+      iOS开发-CocoaPods相关
     </h1>
   
 
@@ -89,12 +95,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1&gt;当APP启动以后创建UIApplication对象<br>2&gt;然后启动“消息循环”监听所有事件<br>3&gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件<br>4&gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象<br>5&gt;UIApplication对象再传递给UIWindow对象<br>6&gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewControlller）<br>7&gt;控制器再传递给控制器所管理的view<br>8&gt;控制器管理的view在其内部搜索本次触摸的店在哪个控件的范围内<br>9&gt;找到对应的控件以后（调用该空间的touchesXXX方法），再依次向上返回，最终返回给“消息循环”<br>10&gt;“消息循环”知道哪个空间被点击之后，再搜索该控件是否注册了对应的事件，如果注册了相应的事件，那么就会调用此点击事件</p>
+        <p>换了新电脑之后发现无法正常使用cocoapods了，所以查了一下，果然发生了一些变化，所以记录一下</p>
+<p>旧版与新版最大的区别是Podfile文件编写的格式<br>下载的格式为：<br>platform :ios, ‘7.0’<br>use_frameworks!<br>xcodeproj ‘path/to/Test.xcodeproj’ #需要手动指定项目的路径</p>
+<p>target ‘Test’ do<br>  pod ‘AFNetworking’, ‘~&gt; 3.0.0’<br>end</p>
+<p>变化较大的是需要手动指定项目路径，<br>pod的格式也放生变化，其中的‘Test’指的是项目的名称</p>
+<p>cocoapods官网地址<br><a href="https://cocoapods.org/" target="_blank" rel="external">https://cocoapods.org/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3su53y000dg91qz2wztm7i" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cip3su543000hg91q8w58y3z0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -103,19 +113,19 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
-          iOS开发-控件不能交互的原因
+          iOS开发-CocoaPods更新慢
         
       </div>
     </a>
   
   
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">iOS开发-MRC与ARC混编</div>
+      <div class="article-nav-title">iOS开发-CocoaPods相关</div>
     </a>
   
 </nav>
