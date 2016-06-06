@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -93,9 +93,9 @@
         <p>SQL注入（sql injection）<br>本例以J2EE为例</p>
 <p>先讲一下我们登录的一般流程：<br>当我们使用浏览器进入某些网站输入账号密码登录的时候，<br>浏览器会通过GET或者POST请求（GET请求将账号密码放在在URL中，POST请求将账号密码放在请求体中）<br>将我们的账号密码发送给服务器（某些网站会对用户信息进行加密上传，而有些不会），<br>服务器接收到我们的账号密码之后就会形成一个条sql语句，从数据出查询是否存在该账号与密码<br>如果存在就会提示登录成功进入下一个界面，如果不存在那么就错误会提示账号密码错误</p>
 <p>那么我们说好的sql注入该怎么用？<br>先下载一下我写的服务器代码，在eclipse上运行（我是用的是eclipse mars，里面自带tomcat），服务器代码的git地址：<br><a href="https://github.com/loginSin/SQLInjectionServer">https://github.com/loginSin/SQLInjectionServer</a></p>
-<p>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select * from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
-<p>接下来我们开始注入<br>“–”的注释作用<br>将上面的url添加一个“–”，这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123--&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123--&amp;password=123</a><br>我们会惊奇的发现也是登录成功，原因是服务器拿到数据之后拼接成的sql语句变成了<br>select <em> from user where account = 123– and password =123<br>因为“–”在sql语句中意思是注释掉后面的内容，所以上面的sql的真正表达是<br>select </em> from user where account = 123<br>意思是查找账号为123的用户是否存在，直接忽略掉了后半段的查找密码的过程</p>
-<p>“or 1=1”的作用<br>如果url这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123</a> or 1=1&amp;password=123<br>也会登录成功，sql语句变成了<br>select * from user where account = 123 or 1=1 and password =123<br>也会把后半段的验证密码给忽略掉</p>
+<p>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select  *  from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
+<p>接下来我们开始注入<br>“–”的注释作用<br>将上面的url添加一个“–”，这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123--&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123--&amp;password=123</a><br>我们会惊奇的发现也是登录成功，原因是服务器拿到数据之后拼接成的sql语句变成了<br>select  <em>  from user where account = 123– and password =123<br>因为“–”在sql语句中意思是注释掉后面的内容，所以上面的sql的真正表达是<br>select  </em>  from user where account = 123<br>意思是查找账号为123的用户是否存在，直接忽略掉了后半段的查找密码的过程</p>
+<p>“or 1=1”的作用<br>如果url这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123</a> or 1=1&amp;password=123<br>也会登录成功，sql语句变成了<br>select  *  from user where account = 123 or 1=1 and password =123<br>也会把后半段的验证密码给忽略掉</p>
 <p>具有类似功能的还有<br>or 1=1–<br>or ‘a’=’a’</p>
 <p>如果某些网站以上介绍的都不行，有可能是网站对sql注入进行了防范，可能需要进行一些特殊的处理<br>or 1=1<br>‘ or 1=1–<br>“ or 1=1–<br>‘ or ‘a’=’a’<br>“ or ‘a’=’a’<br>‘) or (‘a’=’a’<br>如果还不行，我建议还是换个，或者自己搭建一个服务器</p>
 <p>开发工具：eclipse Mars，MySql，tomcat（eclipse Mars自带的tomcat也行）<br>调试工具：随便来个浏览器就行<br>相关知识：servlet，java连接数据库，数据库查询，sql语句，GET/POST请求原理<br>相关知识有任何问题建议百度谷歌走一遭</p>
@@ -106,7 +106,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cip3x1ng40000jc1qafbonolc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cip3x39aq0000jv1qie1f9z7n" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -144,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cip3x1nhi000ljc1qgunizh18" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cip3x39c4000ljv1q711thaqd" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -199,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cip3x1nhj000mjc1q0mlvq8bk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cip3x39c5000mjv1qgecdw6oc" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -236,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cip3x1ngg0003jc1qki43hvos" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cip3x39az0003jv1qx522xxkr" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -273,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cip3x1nh7000gjc1qfgntf228" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cip3x39bn000gjv1q415c3uf8" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -310,7 +310,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3x1nh0000cjc1q40cq3dyy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cip3x39bj000djv1q6f8r28oh" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -348,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cip3x1ngd0002jc1q7ha28xuu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cip3x39ax0002jv1qt5sgpoq2" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -385,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cip3x1nga0001jc1q5k1bz8s5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cip3x39av0001jv1qchnqnvdu" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -426,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cip3x1nhb000ijc1qhic03cyd" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cip3x39bo000hjv1qkffnbex5" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -482,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cip3x1nh8000hjc1q1ooj65fk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cip3x39bq000ijv1qsgveyzz6" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -519,7 +519,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
