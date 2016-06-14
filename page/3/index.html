@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,68 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-iOS开发-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" class="article-date">
+  <time datetime="2016-05-18T03:23:31.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/">制作.a静态库(支持bitcode)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在xcode7.0之后苹果推出了bitcode(详情参见下面链接)，在APP打包上架的时候都会有这个默认选项，如果项目中使用的三方SDK并没有支持bitcode，则开发者必须关闭Xcode的bitcode选项，并且打包的时候要把bitcode给勾掉，本文教你如何制作一个支持bitcode并且支持i386，x86_64,armv7,armv7s,arm64的静态库</p>
+<p>制作静态库完整流程</p>
+<p>1.创建静态库项目，本项目以XXX为项目名，并把代码拷入项目中</p>
+<p>2.项目target设为7.0：用以支持iOS7.0以上的项目</p>
+<p>3.模式设置为Release模式：发布的静态库是真机与模拟器的Release版的合并</p>
+<p>4.Build Settings -&gt; Architectures -&gt; Other -&gt; “+”，输入armv7s：支持armv7s，默认编译的静态库是不支持的</p>
+<p>5.选择真机，编译：产生真机的静态库，此时并不完全支持bitcode，放到其他项目中编译运行不会有问题，但是打包会报错</p>
+<p>6.选择模拟器，编译：产生模拟器版，不支持bitcode</p>
+<p>7.Build Settings -&gt; Other C -&gt; 添加 -fembed-bitcode：保证真机所有的架构都支持bitcode</p>
+<p>8.选择真机，编译：产生完全支持bitcode的真机版静态库</p>
+<p>9.将真机与模拟器合并,在终端中进入静态库所在Products文件夹，输入命令</p>
+<p>lipo -create Release-iphoneos/libXXX.a Release-iphonesimulater/libXXX.a -output libXXX.a</p>
+<p>：当前目录就会存在合并后的lib.a</p>
+<p>10.其他命令</p>
+<p>查看静态库包含的架构：</p>
+<p>lipo -info lib.a </p>
+<p>file lib.a</p>
+<p>查看真机版静态库是否包含bitcode：</p>
+<p>otool -l lib.a | grep bitcode<br>(如果按照上面的步骤，那么应该已经支持了armv7s，输入上面的命令，如果有三个OC类，则会打印出9个bitcode(3*3=9,armv7/armv7s/arm64)，如果只有一个OC类，则只会打印3个bitcode)</p>
+<p>11.如果源码包含C/C++文件，那么该静态库需要依赖于系统库libc++</p>
+<p>12.如果源码包含类扩展，需要在Build Settings -&gt; Other Linker Flags -&gt; 添加-ObjC</p>
+<p>13.模拟器去掉bitcode的原因：当app打包提交的时候，必须是在真机的条件下，所以模拟器下的bitcode就不必要了，而且支持bitcode的最直观影响的就是支持bitcode的静态库会比不支持的大很多(大一倍左右)，模拟器不支持bitcode能减少静态库的大小，这样做出来的静态库支持i386,x86_64,armv7,armv7s,arm64五种架构，支持真机、模拟器，运行、打包都不会有问题</p>
+<p>14.如果代码是纯OC的话编译出来的静态库就比较小，但是如果包含C/C++代码，将会变得巨大，如libSMB有五个OC类，大小1.6M，libSMBBase64Code有三个C++类，一个OC类，一个头文件共4.8M，libSMBUtil有三个C++类，一个OC类，一个头文件，一个.mm共6.5M</p>
+<p>说明：网上说的只要将代码在支持bitcode的Xcode编译一下就可以了，这句话是不对的，因为这样编译出来的静态库真机版的arm64并没有支持bitcode，使用这种静态库编译，运行都是没有问题的，但是当你准备打包的时候就会报错，所以需要进行第7、8步骤</p>
+<p>编译静态库：<br><a href="http://www.jianshu.com/p/8f5b9855efb8" target="_blank" rel="external">http://www.jianshu.com/p/8f5b9855efb8</a></p>
+<p>bitcode相关：<br><a href="http://www.jianshu.com/p/f42a33f5eb61" target="_blank" rel="external">http://www.jianshu.com/p/f42a33f5eb61</a><br><a href="http://www.cocoachina.com/bbs/read.php?tid=744514" target="_blank" rel="external">http://www.cocoachina.com/bbs/read.php?tid=744514</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipfjc63p000ao51qa0vkc4oi" class="article-share-link">Delen</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-iOS开发-mac创建root用户" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -97,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipf1pgh30007zr1qe2iupm6n" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipfjc63e0006o51qxh6mj86p" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -134,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipf1pggx0005zr1q20cbmcc2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipfjc63h0007o51qv4x69q4u" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -180,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipf1pgh50008zr1qbclun3uo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipfjc63b0005o51qosveijox" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -210,16 +272,20 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
@@ -235,10 +301,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/">iOS开发-NULL/nil/Nil/NSNULL区别</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/">iOS开发-控件不能交互的原因</a>
           </li>
         
       </ul>
