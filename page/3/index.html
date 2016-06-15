@@ -68,6 +68,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS开发-解压.a静态库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" class="article-date">
+  <time datetime="2016-05-18T03:46:19.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/">解压.a静态库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇博客讲了怎么制作一个完整的静态库，这次来点黑科技，讲讲怎么把.a文件给解压</p>
+<p>1.进入.a所在的文件夹</p>
+<p>2.查看.a包含的架构</p>
+<p>使用命令：file lib.a 或者 lipo -info lib.a</p>
+<p>3.解压必须剥离出单一架构的静态库，比如所armv7的，所以暂时将抽出的armv7命名为v7.a</p>
+<p>使用命令：lipo lib.a -thin armv7 -output v7.a</p>
+<p>4.此时文件夹中应该多了一个v7.a，抽离.a文件的object</p>
+<p>使用命令：ar -x v7.a</p>
+<p>5.文件中会多若干.o文件，比如多了一个View.o文件</p>
+<p>使用命令：nm View.o &gt; View.m</p>
+<p>然后看看.m的内容,里面只有方法的声明和属性</p>
+<p>但是这个解压只能恢复一部分.m文件的内容，并不能看到.m中完全的实现，如果能被看到，那制作静态库也就没有必要了，但是可以从中获取一些信息，帮助我们对.m进行分析，如果准备搞逆向，这样还是可以提供一些信息的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cipgi56a2000ief1qflfdstc9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS开发-制作.a静态库-支持bitcode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" class="article-date">
@@ -120,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipfk1lss000cpr1qqdht6qiz" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipgi569x000eef1qa0tjm1hm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -159,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipfk1lsb0006pr1qpre30lnu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipgi569n0008ef1qf31nsrow" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipfk1lse0007pr1qg5q8tddh" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipgi569i0006ef1qibtrlf1k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipfk1ls30004pr1qentavw01" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipgi569g0005ef1qsw4v9w46" class="article-share-link">Share</a>
       
       
     </footer>
@@ -272,7 +320,7 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
@@ -282,6 +330,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5-7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
@@ -297,10 +349,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/">iOS开发-NULL/nil/Nil/NSNULL区别</a>
           </li>
         
       </ul>
