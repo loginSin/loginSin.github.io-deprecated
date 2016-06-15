@@ -68,6 +68,123 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS开发-安装VVDocumenter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" class="article-date">
+  <time datetime="2016-05-18T04:24:49.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/">安装VVDocumenter</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter</p>
+<p>VVDocumenter下载地址：<a href="https://github.com/onevcat/VVDocumenter-Xcode.git">https://github.com/onevcat/VVDocumenter-Xcode.git</a></p>
+<p>1.里面是一个Xcode工程，打开工程运行<br>2.运行完成之后，command + q，完全退出Xcode<br>3.再次打开Xcode弹出一个提示框，点击Load Bundle，加载成功之后再Xcode的window选项中会在“Bring All To Font”下面出现一个VVDocumenter，如果没有则表示安装失败</p>
+<p>4.安装失败的解决方案：<br>使用finder进入~/Library/Application Support/Developer/Shared/Xcode，<br>删除Plug-ins下的 VVDocumenter-Xcode.xcplugin，重复步骤1-3</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="ciph3890p000chy1qtr5dw6e0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iOS开发-使用appledoc自动生成文档" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" class="article-date">
+  <time datetime="2016-05-18T03:51:54.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/">使用appledoc自动生成文档</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在公司制作静态库的过程中要求写说明文档，本着能懒就懒的原则，在网上找了找自动生成文档的方法，还是被我找到了，现在分享一下<br>建议下载安装一下onevcat大神的VVDocumenter，方便生成注释，参见我的博客《安装VVDocumenter》<br><a href="https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" target="_blank" rel="external">https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/</a></p>
+<p>安装appledoc，参见我的博客《安装appledoc》<br><a href="https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" target="_blank" rel="external">https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/</a></p>
+<p>1.进入代码所在目录</p>
+<p>2.终端输入：</p>
+<p>appledoc –project-name 项目名 –project-company 公司名 ./</p>
+<p>注：执行成功之后会在代码所在目录生成一个docset-installed.txt</p>
+<p>3.进入xcode，点击</p>
+<p>File-&gt;New-&gt;Target-&gt;Other-&gt;Aggregate</p>
+<p>4.点击上一步创建的Aggregate</p>
+<p>Build Phases-&gt;左上角“+”号-&gt;New Run Script Phase</p>
+<p>5.将下面脚本复制进输入框中</p>
+<p>6.编译(Command+B)</p>
+<p>7.打开docset-installed.txt，进入里面保存的文档路径的文件</p>
+<p>8.选择对应的.docset文件，右击</p>
+<p>显示包内容-&gt;Contents-&gt;Resources-&gt;Documents</p>
+<p>9.Documents文件夹的内容就是文档，将整个Documents文件夹拷到你想放说明文档的位置就行了</p>
+<p>以显示第5步所需的脚本，将以下所有内容复制：</p>
+<p>#appledoc Xcode script  </p>
+<h1 id="Start-constants"><a href="#Start-constants" class="headerlink" title="Start constants"></a>Start constants</h1><p>company=”ACME”;   </p>
+<p>companyID=”com.ACME”; </p>
+<p>companyURL=”<a href="http://ACME.com" target="_blank" rel="external">http://ACME.com</a>“; </p>
+<p>target=”iphoneos”;</p>
+<p>#target=”macosx”;</p>
+<p>outputPath=”~/help”;</p>
+<h1 id="End-constants"><a href="#End-constants" class="headerlink" title="End constants"></a>End constants</h1><p>/usr/local/bin/appledoc \ </p>
+<p>–project-name “${PROJECT_NAME}” \ </p>
+<p>–project-company “${company}” \ </p>
+<p>–company-id “${companyID}” \ </p>
+<p>–docset-atom-filename “${company}.atom” \ </p>
+<p>–docset-feed-url “${companyURL}/${company}/%DOCSETATOMFILENAME” \ </p>
+<p>–docset-package-url “${companyURL}/${company}/%DOCSETPACKAGEFILENAME” \ </p>
+<p>–docset-fallback-url “${companyURL}/${company}” \ </p>
+<p>–output “${outputPath}” \ </p>
+<p>–publish-docset \ </p>
+<p>–docset-platform-family “${target}” \ </p>
+<p>–logformat xcode \ </p>
+<p>–keep-intermediate-files \ </p>
+<p>–no-repeat-first-par \ </p>
+<p>–no-warn-invalid-crossref \ </p>
+<p>–exit-threshold 2 \</p>
+<p>“${PROJECT_DIR}”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="ciph3890n000bhy1qvjztv2pt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS开发-解压.a静态库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" class="article-date">
@@ -106,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cipgjm8kt000kne1qimpfz1v1" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="ciph38912000jhy1qfzu7xgr0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipgjm8ki000dne1qy61wib1h" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="ciph3890q000dhy1qp17ak02y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -207,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipgjm8k90008ne1qwpx244tr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="ciph3890f0008hy1qckgekbfa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -244,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipgjm8k70007ne1qlw9ke1vy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="ciph3890l000ahy1qivvedapi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipgjm8k20005ne1q0jfqelif" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="ciph3890d0007hy1q7dx9ocz2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +437,7 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
@@ -332,6 +449,14 @@
       <ul>
         
           <li>
+            <a href="/loginSin.github.io/2016/06/16/test-add-image/">test add image</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/">XMPP-mac搭建xmpp服务器(openfire)</a>
+          </li>
+        
+          <li>
             <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
           </li>
         
@@ -341,14 +466,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/">python-文件与流-管式输出</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
           </li>
         
       </ul>
