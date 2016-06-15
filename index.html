@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -91,8 +91,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>MySQL下载地址：<a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a></p>
-<p>目前mysql提供了两种安装方式<br>一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解<br>二：tar包安装，这也是本文要讲的主要内容<br>前提：<br>1.下载好mysql的tar包，并解压好<br>2.mac的当前拥有sudo权限，或者可以使用root权限（我是]直接使用了root权限，见：<a href="https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS%E5%BC%80%E5%8F%91-mac%E5%88%9B%E5%BB%BAroot%E7%94%A8%E6%88%B7/）" target="_blank" rel="external">https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS%E5%BC%80%E5%8F%91-mac%E5%88%9B%E5%BB%BAroot%E7%94%A8%E6%88%B7/）</a><br>步骤：<br>1.进入解压后的二进制文件所在的目录，将其移动到安装目录（*第一个路径是包含bin文件夹的上一级目录）<br>mv mysql-5.7.13-osx10.11-x86_64 /usr/local/mysql<br>2.更改mysql安装目录所属的用户和用户组<br>cd /usr/local<br>sudo chown -R root:wheel mysql<br>3.切换到mysql安装目录并执行初始化命令，并记录生成的临时root密码<br>cd /usr/local/mysql<br>bin/mysqld –initialize –user=mysql<br>(执行完成之后会在终端最后一行打印出：[Note] A temporary password is generated for root@localhost:XXXXXXX,最后的XXXXXXX即为临时密码，保存下来）<br>4.测试启动/重启/停止/查看运行状态<br>启动：<br>support-files/mysql.server start<br>重启：<br>support-files/mysql.server restart<br>停止：<br>support-files/mysql.server stop<br>检查mysql运行状态<br>support-files/mysql.server status</p>
-<p>bash脚本：</p>
+<p>目前mysql提供了两种安装方式<br>一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解<br>二：tar包安装，这也是本文要讲的主要内容<br>前提：<br>1.下载好mysql的tar包，并解压好<br>2.mac的当前拥有sudo权限，或者可以使用root权限（我是]直接使用了root权限，见：<a href="https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS%E5%BC%80%E5%8F%91-mac%E5%88%9B%E5%BB%BAroot%E7%94%A8%E6%88%B7/）" target="_blank" rel="external">https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS%E5%BC%80%E5%8F%91-mac%E5%88%9B%E5%BB%BAroot%E7%94%A8%E6%88%B7/）</a><br>步骤：<br>1.进入解压后的二进制文件所在的目录，将其移动到安装目录（*第一个路径是包含bin文件夹的上一级目录）<br>mv mysql-5.7.13-osx10.11-x86_64 /usr/local/mysql<br>2.更改mysql安装目录所属的用户和用户组<br>cd /usr/local<br>sudo chown -R root:wheel mysql<br>3.切换到mysql安装目录并执行初始化命令，并记录生成的临时root密码<br>cd /usr/local/mysql<br>bin/mysqld –initialize –user=mysql<br>(执行完成之后会在终端最后一行打印出：[Note] A temporary password is generated for root@localhost:XXXXXXX,最后的XXXXXXX即为临时密码，保存下来）<br>4.测试启动/重启/停止/查看运行状态<br>启动：<br>support-files/mysql.server start<br>重启：<br>support-files/mysql.server restart<br>停止：<br>support-files/mysql.server stop<br>检查mysql运行状态<br>support-files/mysql.server status<br>（下面有我写的shell脚本来管理mysql的启停）<br>5.修改root密码<br>进入bin目录，使用命令进入mysql操作环境<br>cd /usr/local/mysql/bin<br>./mysql -u root -p<br>输入第三步保存的密码<br>SET PASSWORD FOR ‘root’@’localhost’ = PASSWORD(‘newpass’);<br>之后就可以用新的密码来登录</p>
+<p>附：<br>shell脚本：</p>
 <p>#!/bin/bash</p>
 <p>function mStart(){<br>    echo “mysql is starting”<br>    sudo /usr/local/mysql/support-files/mysql.server start<br>}</p>
 <p>function mStop(){<br>    echo “mysql is stopping”<br>    sudo /usr/local/mysql/support-files/mysql.server stop<br>}</p>
@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipgiccmp0000fc1q3jq3r9uv" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipgiun8n0000kr1qztoz9em0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipgicco4000nfc1qxvj14z9m" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipgiuna5000lkr1q365ozpti" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipgiccmx0002fc1qj1r7cqx5" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipgiun8s0001kr1qt4y0rtsb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipgicco2000mfc1qvhwn1jhd" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipgiun9w000kkr1q4ev32zc8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -284,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipgicco5000ofc1q6nxfqthc" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipgiuna8000mkr1qc800bt7q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipgiccmz0003fc1qhirj72ef" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipgiun8x0003kr1q1b7cpzan" class="article-share-link">Share</a>
       
       
     </footer>
@@ -358,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cipgiccnq000hfc1q9r5kgsob" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cipgiun9r000ikr1qm5zrm13m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -395,7 +395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cipgiccnk000dfc1q4gb541us" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cipgiunaa000nkr1qmxgoper5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipgiccn10004fc1q84idaldd" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipgiun930006kr1qtdim60tq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipgiccmu0001fc1qj96lkmzi" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipgiun8u0002kr1q1pb72lj0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +507,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -544,7 +544,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 loginSin<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
