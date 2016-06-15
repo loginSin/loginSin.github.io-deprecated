@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -90,11 +90,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>openfire下载地址：<a href="http://www.igniterealtime.org/downloads/index.jsp" target="_blank" rel="external">点我</a><br>1、下载的是dmg文件，mac下直接双击安装<br>2、安装成功之后在系统偏好设置的其他里，点击openfire的图标<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire1.png" alt="url demo"><br>启动后，点击“Open Admin Console”按钮，会自动进入openfire的配置页面<br>3、配置opefire服务器<br>3.1、设置语言，选中文<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire2.png" alt="url demo"><br>3.2、设置主机的访问ip地址，我的设置为127.0.0.1<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire3.png" alt="url demo"><br>3.3、设置数据库，如果设置外部数据库（我使用的是mysql），选择标准数据库连接<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire4.png" alt="url demo"><br>3.4、设置数据库连接<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire5.png" alt="url demo"><br>注：用户名、密码均为mysql数据的账号密码，<br>（1）数据库驱动选择：MySQL，前提是已安装MySQL，参考：<a href="https://loginsin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11%E5%AE%89%E8%A3%85/" target="_blank" rel="external">https://loginsin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11%E5%AE%89%E8%A3%85/</a><br>（2）JDBC驱动，默认不变<br>com.mysql.jdbc.Driver<br>（3）在mysql中创建一个openfire的数据<br>$ sudo /usr/local/mysql/bin/mysql -u root -p<br>SQL&gt; create database openfire;<br>SQL&gt; use openfire<br>（4）jdbc:mysql://你的主机名:端口号/数据库名称<br>    这里设置为<br>jdbc:mysql://localhost:3306/openfire<br>3.5、特性设置，一般选用默认的即可<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire6.png" alt="url demo"><br>3.6、设置openfire服务器管理员的帐号和密码<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire7.png" alt="url demo"><br>完成注册<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/install-openfire/openfire8.png" alt="url demo"></p>
+<p>我写了一个shell脚本，可以直接进入openfire数据库，详情参见：<a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/mysqlopenfire.sh" target="_blank" rel="external">shell脚本</a></p>
+<p>详情参见：<a href="http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html" target="_blank" rel="external">传送门</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="ciph3b6dg0002ij1qmz5ym3dt" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="ciph5019l0001la1qq8j2bt5i" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -140,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="ciph3b6d80000ij1qu3i7qktw" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="ciph5019g0000la1q5tnvvb2d" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -179,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="ciph3b6ek000nij1qvixqg9v4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="ciph501av000ola1q8amhbe6f" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -227,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="ciph3b6dd0001ij1qfvgi892b" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="ciph5019n0002la1qx2lspzw9" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -265,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="ciph3b6el000oij1qjuo6jg80" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="ciph501au000nla1q35l48k18" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -320,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="ciph3b6em000pij1qghe7a0q8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="ciph501b1000pla1q8rry4zxl" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -357,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="ciph3b6dm0005ij1q7dimxrad" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="ciph5019w0006la1qzc1xxs8q" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -394,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="ciph3b6ec000jij1q518sgiqg" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="ciph501aq000kla1qomh0srcv" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -431,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="ciph3b6e7000fij1qrsu7r658" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="ciph501al000ila1qjbj8d7kk" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -469,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="ciph3b6dk0004ij1qnmzru6zj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="ciph5019s0004la1qiq7xnxnk" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -506,7 +509,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
