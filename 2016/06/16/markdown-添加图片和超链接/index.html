@@ -5,21 +5,18 @@
   
   <title>markdown-添加图片和超链接 | loginSin&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我使用的hexo来搭建的博客，详情可以在简书上进行查找之前没有用过，所以使用Mou对md文件进行编译都只有纯问文字，今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手研究了一下超链接，再次分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一个仓库，专门用来存放博客中需要用到的脚本和图片等相关资源
-2、超链接超链接可以直接">
+  <meta name="description" content="我用hexo在github搭建的博客，详情可以在简书上进行查找之前没有玩儿过markdown进行文本编辑，所以使用Mou对md文件进行编译都只有纯文字（看我最初的博客就知道了），今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手看了看超链接在markdown的实现，在此分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="markdown-添加图片和超链接">
 <meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/index.html">
 <meta property="og:site_name" content="loginSin's blog">
-<meta property="og:description" content="我使用的hexo来搭建的博客，详情可以在简书上进行查找之前没有用过，所以使用Mou对md文件进行编译都只有纯问文字，今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手研究了一下超链接，再次分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一个仓库，专门用来存放博客中需要用到的脚本和图片等相关资源
-2、超链接超链接可以直接">
+<meta property="og:description" content="我用hexo在github搭建的博客，详情可以在简书上进行查找之前没有玩儿过markdown进行文本编辑，所以使用Mou对md文件进行编译都只有纯文字（看我最初的博客就知道了），今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手看了看超链接在markdown的实现，在此分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一">
 <meta property="og:image" content="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown2.png">
-<meta property="og:updated_time" content="2016-06-15T17:46:31.000Z">
+<meta property="og:updated_time" content="2016-06-15T17:54:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown-添加图片和超链接">
-<meta name="twitter:description" content="我使用的hexo来搭建的博客，详情可以在简书上进行查找之前没有用过，所以使用Mou对md文件进行编译都只有纯问文字，今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手研究了一下超链接，再次分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一个仓库，专门用来存放博客中需要用到的脚本和图片等相关资源
-2、超链接超链接可以直接">
+<meta name="twitter:description" content="我用hexo在github搭建的博客，详情可以在简书上进行查找之前没有玩儿过markdown进行文本编辑，所以使用Mou对md文件进行编译都只有纯文字（看我最初的博客就知道了），今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手看了看超链接在markdown的实现，在此分享一下1、图片展示在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown.png">
   
     <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
@@ -62,9 +59,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -95,16 +92,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我使用的hexo来搭建的博客，详情可以在简书上进行查找<br>之前没有用过，所以使用Mou对md文件进行编译都只有纯问文字，今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手研究了一下超链接，再次分享一下<br>1、图片展示<br>在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一个仓库，专门用来存放博客中需要用到的脚本和图片等相关资源<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown.png" alt="url demo"></p>
+        <p>我用hexo在github搭建的博客，详情可以在简书上进行查找<br>之前没有玩儿过markdown进行文本编辑，所以使用Mou对md文件进行编译都只有纯文字（看我最初的博客就知道了），今天看到一位大神的项目写了一个md文件，可以显示图片，所以就对其稍微研究了一下，顺手看了看超链接在markdown的实现，在此分享一下<br>1、图片展示<br>在后面的()中写入图片的链接，建议写网络图片路径，我在github上创建了一个仓库，专门用来存放博客中需要用到的脚本和图片等相关资源<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown.png" alt="url demo"></p>
 <p>2、超链接<br>超链接可以直接使用html的a标签来实现<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/markdown/markdown2.png" alt="url demo"></p>
-<p>比如：<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/images/test.jpg" target="_blank" rel="external">女神</a></p>
+<p>比如：<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/images/test.jpg" target="_blank" rel="external">女神的照片</a></p>
 <p>注：如果有自己的服务器来保存相关资源最好，但是如果像我一样使用github来保存的话，就路径就必须是在raw下，具体原因目前也没有搞明白，如果有大神知晓，请告诉我，上方有我的邮箱^_^</p>
 <p>详情可以参照原始的md文件：<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/markdown-%E6%B7%BB%E5%8A%A0%E5%9B%BE%E7%89%87%E5%92%8C%E8%B6%85%E9%93%BE%E6%8E%A5.md" target="_blank" rel="external">原始md文件</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="ciph6668j000noi1qtu9e952z" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="ciph6gv22000npb1qigy4yox0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -115,7 +112,7 @@
   
   
     <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">XMPP-mac搭建xmpp服务器(openfire)</div>
     </a>
   
@@ -146,7 +143,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -183,7 +180,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 loginSin<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
