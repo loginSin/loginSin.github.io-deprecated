@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL-mysql5,7 for Mac 10.11安装 | loginSin&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MySQL下载地址：http://dev.mysql.com/downloads/mysql/
+目前mysql提供了两种安装方式一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解二：tar包安装，这也是本文要讲的主要内容前提：1.下载好mysql的tar包，并解压好2.mac的当前拥有sudo权限，或者可以使用root权限（我是直接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL-mysql5,7 for Mac 10.11安装">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/index.html">
+<meta property="og:site_name" content="loginSin's blog">
+<meta property="og:description" content="MySQL下载地址：http://dev.mysql.com/downloads/mysql/
+目前mysql提供了两种安装方式一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解二：tar包安装，这也是本文要讲的主要内容前提：1.下载好mysql的tar包，并解压好2.mac的当前拥有sudo权限，或者可以使用root权限（我是直接">
+<meta property="og:updated_time" content="2016-06-16T01:15:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL-mysql5,7 for Mac 10.11安装">
+<meta name="twitter:description" content="MySQL下载地址：http://dev.mysql.com/downloads/mysql/
+目前mysql提供了两种安装方式一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解二：tar包安装，这也是本文要讲的主要内容前提：1.下载好mysql的tar包，并解压好2.mac的当前拥有sudo权限，或者可以使用root权限（我是直接">
+  
+    <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/loginSin.github.io/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/loginSin.github.io/" id="logo">loginSin&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/loginSin.github.io/" id="subtitle">E-mail:login_sin@qq.com</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-MySQL-mysql5.7-for-Mac-10-11安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" class="article-date">
+  <time datetime="2016-06-15T05:36:14.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL-mysql5,7 for Mac 10.11安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>MySQL下载地址：<a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">http://dev.mysql.com/downloads/mysql/</a></p>
+<p>目前mysql提供了两种安装方式<br>一：dmg/pkg，这两种安装包跟windows下的exe一样，都是傻瓜式安装，并没有什么技术含量，这里就不一一讲解<br>二：tar包安装，这也是本文要讲的主要内容<br>前提：<br>1.下载好mysql的tar包，并解压好<br>2.mac的当前拥有sudo权限，或者可以使用root权限（我是直接使用了root权限，而mac默认没有root用户，需要创建，<a href="https://loginsin.github.io/loginSin.github.io/2016/05/18/iOS%E5%BC%80%E5%8F%91-mac%E5%88%9B%E5%BB%BAroot%E7%94%A8%E6%88%B7/" target="_blank" rel="external">点击详情</a>）</p>
+<p>步骤：<br>1.进入解压后的二进制文件所在的目录，将其移动到安装目录（*第一个路径是bin文件夹的上一级目录）<br>mv mysql-5.7.13-osx10.11-x86_64 /usr/local/mysql<br>2.更改mysql安装目录所属的用户和用户组<br>cd /usr/local<br>sudo chown -R root:wheel mysql<br>3.切换到mysql安装目录并执行初始化命令，并记录生成的临时root密码<br>cd /usr/local/mysql<br>bin/mysqld –initialize –user=mysql<br>(执行完成之后会在终端最后一行打印出：[Note] A temporary password is generated for root@localhost:XXXXXXX,最后的XXXXXXX即为临时密码，保存下来）<br>4.测试启动/重启/停止/查看运行状态<br>启动：<br>support-files/mysql.server start<br>重启：<br>support-files/mysql.server restart<br>停止：<br>support-files/mysql.server stop<br>检查mysql运行状态<br>support-files/mysql.server status<br>（下面有我写的shell脚本来管理mysql的启停）<br>5.修改root密码<br>进入bin目录，使用命令进入mysql操作环境<br>cd /usr/local/mysql/bin<br>./mysql -u root -p<br>输入第三步保存的密码<br>SET PASSWORD FOR ‘root’@’localhost’ = PASSWORD(‘newpass’);<br>之后就可以用新的密码来登录</p>
+<p>附：<br>shell脚本：<a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/mysql.sh" target="_blank" rel="external">脚本传送门</a></p>
+<p><a href="http://www.widlabs.com/article/mac-os-x-install-mysql-57-with-tar-gz" target="_blank" rel="external">点击参考详情</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipho6bpf0000j61qx00ks2l1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          XMPP-mac搭建xmpp服务器(openfire)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python-Mac配置python集成开发环境</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/16/asdf/">asdf</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/">XMPP-mac搭建xmpp服务器(openfire)</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 loginSin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/loginSin.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/loginSin.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/loginSin.github.io/fancybox/jquery.fancybox.css">
+  <script src="/loginSin.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/loginSin.github.io/js/script.js"></script>
+
+  </div>
+</body>
+</html>

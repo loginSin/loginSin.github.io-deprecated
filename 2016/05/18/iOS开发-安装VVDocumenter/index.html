@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安装VVDocumenter | loginSin&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter
+VVDocumenter下载地址：https://github.c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装VVDocumenter">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/index.html">
+<meta property="og:site_name" content="loginSin's blog">
+<meta property="og:description" content="在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter
+VVDocumenter下载地址：https://github.c">
+<meta property="og:updated_time" content="2016-05-18T04:35:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安装VVDocumenter">
+<meta name="twitter:description" content="在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter
+VVDocumenter下载地址：https://github.c">
+  
+    <link rel="alternate" href="/atom.xml" title="loginSin&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/loginSin.github.io/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/loginSin.github.io/" id="logo">loginSin&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/loginSin.github.io/" id="subtitle">E-mail:login_sin@qq.com</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-iOS开发-安装VVDocumenter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" class="article-date">
+  <time datetime="2016-05-18T04:24:49.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      安装VVDocumenter
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在写代码的过程中免不了要写很多注释，尤其是制作静态库的相关代码，因为要给别人用，所以.h中的注释会写的很详细，但是自己一点一点写注释的话有很麻烦，本着能懒就懒的原则，在网上找到了onevcat大神写的VVDocumenter，只需要编译一下，安装到Xcode上输入3个’/‘就能在动生成注释，下面讲讲怎么安装VVDocumenter</p>
+<p>VVDocumenter下载地址：<a href="https://github.com/onevcat/VVDocumenter-Xcode.git">https://github.com/onevcat/VVDocumenter-Xcode.git</a></p>
+<p>1.里面是一个Xcode工程，打开工程运行<br>2.运行完成之后，command + q，完全退出Xcode<br>3.再次打开Xcode弹出一个提示框，点击Load Bundle，加载成功之后再Xcode的window选项中会在“Bring All To Font”下面出现一个VVDocumenter，如果没有则表示安装失败</p>
+<p>4.安装失败的解决方案：<br>使用finder进入~/Library/Application Support/Developer/Shared/Xcode，<br>删除Plug-ins下的 VVDocumenter-Xcode.xcplugin，重复步骤1-3</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="cipho6bqp000gj61qcffnlkcd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          安装appledoc
+        
+      </div>
+    </a>
+  
+  
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用appledoc自动生成文档</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/16/asdf/">asdf</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/">XMPP-mac搭建xmpp服务器(openfire)</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 loginSin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/loginSin.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/loginSin.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/loginSin.github.io/fancybox/jquery.fancybox.css">
+  <script src="/loginSin.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/loginSin.github.io/js/script.js"></script>
+
+  </div>
+</body>
+</html>
