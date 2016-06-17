@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,43 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-iOS开发-响应者链条顺序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" class="article-date">
+  <time datetime="2016-05-26T15:42:15.000Z" itemprop="datePublished">2016-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/">iOS开发-响应者链条顺序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1&gt;当APP启动以后创建UIApplication对象<br>2&gt;然后启动“消息循环”监听所有事件<br>3&gt;当用户触摸屏幕的时候，“消息循环”监听到这个触摸事件<br>4&gt;“消息循环”首先把监听到的触摸事件传递给UIApplication对象<br>5&gt;UIApplication对象再传递给UIWindow对象<br>6&gt;UIWindow对象在传递给UIWindow的跟控制器（rootViewControlller）<br>7&gt;控制器再传递给控制器所管理的view<br>8&gt;控制器管理的view在其内部搜索本次触摸的店在哪个控件的范围内<br>9&gt;找到对应的控件以后（调用该空间的touchesXXX方法），再依次向上返回，最终返回给“消息循环”<br>10&gt;“消息循环”知道哪个空间被点击之后，再搜索该控件是否注册了对应的事件，如果注册了相应的事件，那么就会调用此点击事件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cipjy2v63000gxp1qt51b3q0e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-iOS开发-MRC与ARC混编" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -96,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipihqsix0004vt1qtj2qio5p" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipjy2v4p0003xp1q9ateqk2f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -133,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipihqsiv0003vt1qyz0mecdc" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipjy2v500006xp1qg9crgofk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cipihqsk1000jvt1q3bw6xitf" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cipjy2v6h000lxp1q9ichk0iq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -230,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cipihqsk3000kvt1q935mhzij" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cipjy2v6f000kxp1qp0vd32hz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="cipihqsk6000mvt1qdpmscq42" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="cipjy2v6k000oxp1qlvpgjjic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="cipihqsj40007vt1qz5b593yn" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="cipjy2v5m0009xp1q35kgt4ov" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,7 +509,7 @@ if (completion)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="cipihqsjc000avt1qfaxvhhp7" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="cipjy2v5u000cxp1qsbh3xr7p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -525,7 +562,7 @@ if (completion)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="cipihqsja0009vt1qyy9s3y2c" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="cipjy2v5t000bxp1qrgohkumc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,46 +622,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cipihqsjx000hvt1ql05pqjv2" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-安装appledoc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" class="article-date">
-  <time datetime="2016-05-18T04:37:15.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/">安装appledoc</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>appledoc的git地址：<a href="https://github.com/tomaz/appledoc.git">https://github.com/tomaz/appledoc.git</a><br>1.下载appledoc<br>2.进入./appledoc文件夹<br>3.安装：sudo sh install-appledoc.sh<br>4.检测：appledoc –version</p>
-<p>注：<br>如果安装了多个Xcode并且改名了，安装的时候就可能会报下列的错误，意思是appledoc无法正常识别Xcode的路径<br>xcode-select: error: tool ‘xcodebuild’ requires Xcode, but active developer directory ‘/Library/Developer/CommandLineTools’ is a command line tools instance</p>
-<p>需要使用以下命令来更改Xcode的路径<br>sudo xcode-select –switch /Applications/Xcode7.3.1.app/Contents/Developer/</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="cipihqsjk000fvt1q7flktin4" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cipjy2v5w000dxp1q3byo40ex" class="article-share-link">Share</a>
       
       
     </footer>
@@ -654,16 +652,20 @@ void TFLog(NSString *format, ...);
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/">python-动态添加方法</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
@@ -681,10 +683,6 @@ void TFLog(NSString *format, ...);
             <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
           </li>
         
-          <li>
-            <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -698,7 +696,7 @@ void TFLog(NSString *format, ...);
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 loginSin<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
