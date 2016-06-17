@@ -3,18 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS开发-NULL/nil/Nil/NSNULL区别 | 登录无奈 · 博客</title>
+  <title>python-定义类方法 | 登录无奈 · 博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
+  <meta name="description" content="和属性类似，方法也分实例方法和类方法。
+在class中定义的全部是实例方法，实例方法第一个参数 self 是实例本身。
+要在class中定义类方法，需要这么写：
+class Person(object):    count = 0    @classmethod    def how_many(cls):        return cls.count    def init(self, name">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发-NULL/nil/Nil/NSNULL区别">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/index.html">
+<meta property="og:title" content="python-定义类方法">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/18/python-定义类方法/index.html">
 <meta property="og:site_name" content="登录无奈 · 博客">
-<meta property="og:description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
-<meta property="og:updated_time" content="2016-05-26T16:02:00.000Z">
+<meta property="og:description" content="和属性类似，方法也分实例方法和类方法。
+在class中定义的全部是实例方法，实例方法第一个参数 self 是实例本身。
+要在class中定义类方法，需要这么写：
+class Person(object):    count = 0    @classmethod    def how_many(cls):        return cls.count    def init(self, name">
+<meta property="og:updated_time" content="2016-06-17T16:30:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发-NULL/nil/Nil/NSNULL区别">
-<meta name="twitter:description" content="nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值Nil是OC类的字面零值NULL是C的，空地址，地址的数值为0，是个长整数NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题">
+<meta name="twitter:title" content="python-定义类方法">
+<meta name="twitter:description" content="和属性类似，方法也分实例方法和类方法。
+在class中定义的全部是实例方法，实例方法第一个参数 self 是实例本身。
+要在class中定义类方法，需要这么写：
+class Person(object):    count = 0    @classmethod    def how_many(cls):        return cls.count    def init(self, name">
   
     <link rel="alternate" href="/atom.xml" title="登录无奈 · 博客" type="application/atom+xml">
   
@@ -67,10 +76,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-NULL-nil-Nil-NSNULL区别" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-python-定义类方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" class="article-date">
-  <time datetime="2016-05-26T15:59:08.000Z" itemprop="datePublished">2016-05-26</time>
+    <a href="/loginSin.github.io/2016/06/18/python-定义类方法/" class="article-date">
+  <time datetime="2016-06-17T16:25:02.000Z" itemprop="datePublished">2016-06-18</time>
 </a>
     
   </div>
@@ -81,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS开发-NULL/nil/Nil/NSNULL区别
+      python-定义类方法
     </h1>
   
 
@@ -89,12 +98,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值<br>Nil是OC类的字面零值<br>NULL是C的，空地址，地址的数值为0，是个长整数<br>NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题</p>
+        <p>和属性类似，方法也分实例方法和类方法。</p>
+<p>在class中定义的全部是实例方法，实例方法第一个参数 self 是实例本身。</p>
+<p>要在class中定义类方法，需要这么写：</p>
+<p>class Person(object):<br>    count = 0<br>    @classmethod<br>    def how_many(cls):<br>        return cls.count<br>    def <strong>init</strong>(self, name):<br>        self.name = name<br>        Person.count = Person.count + 1</p>
+<p>print Person.how_many()<br>p1 = Person(‘Bob’)<br>print Person.how_many()<br>通过标记一个<a bgcolor="#ff4500">@classmethod</a>，该方法将绑定到 Person 类上，而非类的实例。类方法的第一个参数将传入类本身，通常将参数名命名为 cls，上面的 cls.count 实际上相当于 Person.count。</p>
+<p>因为是在类上调用，而非实例上调用，因此类方法无法获得任何实例变量，只能获得类的引用。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipjyd6pp000sy91q0hkpeo02" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipjyd6pj000py91qhtgbtucy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -103,19 +117,10 @@
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          python-文件和流-1
-        
-      </div>
-    </a>
   
-  
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">iOS开发-控件不能交互的原因</div>
+      <div class="article-nav-title">python-动态添加方法</div>
     </a>
   
 </nav>
@@ -126,7 +131,7 @@
 
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-iOS开发-NULL-nil-Nil-NSNULL区别" data-title="iOS开发-NULL/nil/Nil/NSNULL区别" data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/"></div>
+    <div class="ds-thread" data-thread-key="post-python-定义类方法" data-title="python-定义类方法" data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

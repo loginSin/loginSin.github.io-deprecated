@@ -68,6 +68,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS开发-使用的一些宏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" class="article-date">
+  <time datetime="2016-05-18T08:13:38.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/">iOS使用的一些宏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.摒弃函数提示，使用这个宏可以提示用户该方法已被废弃，如果编写一些开源库做向下兼容的时候可能会用到</p>
+<p>#if defined(<strong>GNUC</strong>) &amp;&amp; (<strong>GNUC</strong> &gt;= 4) &amp;&amp; defined(<strong>APPLE_CC</strong>) &amp;&amp; (<strong>APPLE_CC</strong> &gt;= 5465)</p>
+<p>#define TF_DEPRECATED(_version) <strong>attribute</strong>((deprecated))</p>
+<p>#else</p>
+<p>#define TF_DEPRECATED(_version)</p>
+<p>#endif<br>eg:表示在0.1.1之后被废弃了</p>
+<ul>
+<li>(void)voiceprintExistent:(void(^)(BOOL isExist,NSString <em>errorCode,NSError </em>error))resultBlock TF_DEPRECATED(0.1.1);</li>
+</ul>
+<p>2.release版本屏蔽log</p>
+<p>#ifdef DEBUG</p>
+<p>#else</p>
+<p>#define printf(…)</p>
+<p>#define NSLog(…)</p>
+<p>#define TFLog(…)</p>
+<p>#define TFNetLog(…)</p>
+<p>#endif</p>
+<p>3.自定义log提示</p>
+<p>#ifdef __cplusplus<br>extern “C” {</p>
+<p>#endif // __cplusplus</p>
+<pre><code>void TFNetLog(NSString *format, ...);
+void TFLog(NSString *format, ...);
+</code></pre><p>#ifdef __cplusplus<br>}</p>
+<p>#endif // __cplusplus</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cipjyd6ol000ay91qcn70mb31" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS开发-安装appledoc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" class="article-date">
@@ -97,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="cipjy2v61000fxp1qw9dn3htz" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="cipjyd6os000fy91qmjz01rmk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="cipjy2v65000hxp1qepe6vs7v" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="cipjyd6ot000gy91q7xoqc71r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="cipjy2v5q000axp1qf99kkgwa" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="cipjyd6on000by91qk0mre9m1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cipjy2v68000ixp1qblktlarw" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cipjyd6oz000iy91qmyk63vf3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipjy2v5z000exp1qx78sbbyv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipjyd6op000cy91qgqh6ilzc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipjy2v510007xp1q711f8i71" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipjyd6ob0006y91qqo1p8g82" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipjy2v540008xp1qo9tac7hj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipjyd6oj0009y91q8qts01lo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipjy2v4u0005xp1qnglg40il" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac关闭rootless/" data-id="cipjyd6oe0007y91qb9acahep" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +536,7 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
@@ -486,6 +546,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/18/python-定义类方法/">python-定义类方法</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/">python-动态添加方法</a>
@@ -501,10 +565,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/">python-Mac配置python集成开发环境</a>
           </li>
         
       </ul>
