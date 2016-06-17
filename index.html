@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -92,15 +92,13 @@
       
         <p>和属性类似，方法也分实例方法和类方法。</p>
 <p>在class中定义的全部是实例方法，实例方法第一个参数 self 是实例本身。</p>
-<p>要在class中定义类方法，需要这么写：</p>
-<p>class Person(object):<br>    count = 0<br>    @classmethod<br>    def how_many(cls):<br>        return cls.count<br>    def <strong>init</strong>(self, name):<br>        self.name = name<br>        Person.count = Person.count + 1</p>
-<p>print Person.how_many()<br>p1 = Person(‘Bob’)<br>print Person.how_many()<br>通过标记一个<a bgcolor="#ff4500">@classmethod</a>，该方法将绑定到 Person 类上，而非类的实例。类方法的第一个参数将传入类本身，通常将参数名命名为 cls，上面的 cls.count 实际上相当于 Person.count。</p>
+<p>要在class中定义类方法，需要这么写：<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/python/class_method.png" alt="url demo"><br>通过标记一个<a bgcolor="#ff4500">@classmethod</a>，该方法将绑定到 Person 类上，而非类的实例。类方法的第一个参数将传入类本身，通常将参数名命名为 cls，上面的 cls.count 实际上相当于 Person.count。</p>
 <p>因为是在类上调用，而非实例上调用，因此类方法无法获得任何实例变量，只能获得类的引用。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipjyd6pj000py91qhtgbtucy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipjysrlm000ozt1qtpstzbnv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -132,17 +130,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在iOS的开发中可以使用runtime实现动态的添加属性和方法，<br>在python中也可以将方法动态地添加到实例上，只是需要用 types.MethodType() 把一个函数变为一个方法：</p>
-<p>import types<br>def fn_get_grade(self):<br>    if self.score &gt;= 80:<br>        return ‘A’<br>    if self.score &gt;= 60:<br>        return ‘B’<br>    return ‘C’</p>
-<p>class Person(object):<br>    def <strong>init</strong>(self, name, score):<br>        self.name = name<br>        self.score = score</p>
-<p>p1 = Person(‘Bob’, 90)<br>p1.get_grade = types.MethodType(fn_get_grade, p1, Person)<br>print p1.get_grade()</p>
-<h1 id="gt-A"><a href="#gt-A" class="headerlink" title="=&gt; A"></a>=&gt; A</h1><p>p2 = Person(‘Alice’, 65)<br>print p2.get_grade()</p>
-<h1 id="ERROR-AttributeError-‘Person’-object-has-no-attribute-‘get-grade’"><a href="#ERROR-AttributeError-‘Person’-object-has-no-attribute-‘get-grade’" class="headerlink" title="ERROR: AttributeError: ‘Person’ object has no attribute ‘get_grade’"></a>ERROR: AttributeError: ‘Person’ object has no attribute ‘get_grade’</h1><h1 id="因为p2实例并没有绑定get-grade"><a href="#因为p2实例并没有绑定get-grade" class="headerlink" title="因为p2实例并没有绑定get_grade"></a>因为p2实例并没有绑定get_grade</h1><p>给一个实例动态添加方法并不常见，直接在class中定义要更直观。</p>
+        <p>在iOS的开发中可以使用runtime实现动态的添加属性和方法，<br>在python中也可以将方法动态地添加到实例上，只是需要用 types.MethodType() 把一个函数变为一个方法：<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/python/Dynamic_adding_method.png" alt="url demo"></p>
+<p>给一个实例动态添加方法并不常见，直接在class中定义要更直观。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipjyd6pe000ly91qb9o5i9ae" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipjysrlk000nzt1qzcxi4adf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -183,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipjyd6pf000my91q45omhq0e" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipjysrlo000pzt1qk4wfx5ei" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipjyd6o10002y91qt1wbcqfj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipjysrii0001zt1qdzh37kxv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipjyd6nx0001y91q8oys2ogl" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipjysric0000zt1qsxx94cfl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipjyd6pg000ny91qtmqnfvfa" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipjysrlg000lzt1q8s04a8zg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipjyd6ns0000y91qxaewbnut" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipjysrit0004zt1qyfb4ewyy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipjyd6pl000qy91qmwsdhmnc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipjysrls000rzt1qg549h061" class="article-share-link">Share</a>
       
       
     </footer>
@@ -443,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipjyd6pn000ry91q72wxdnvo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipjysrlw000szt1qm2qwhnl9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -480,7 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipjyd6pp000sy91q0hkpeo02" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipjysrj40006zt1q44xwzpco" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,7 +511,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
