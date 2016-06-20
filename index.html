@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,46 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-python-mac安装MySQLdb-Python-mysql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" class="article-date">
+  <time datetime="2016-06-20T13:42:03.000Z" itemprop="datePublished">2016-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/">python-mac安装MySQLdb(Python mysql)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用python操纵mysql数据库需要使用到MySQLdb:<a href="https://sourceforge.net/projects/mysql-python" target="_blank" rel="external">下载地址</a><br>解压MySQL-python-1.2.4b4.tar后使用终端进入相应的该文件夹<br>执行命令:<br>python setup.py install<br>此时可能会报错：EnvironmentError: mysql_config not found<br>解决方案：本机的mysql安装在了/usr/local/mysql下，在mysql的bin目录下有一个mysql_config文件<br>在MySQL-python的安装包路径下找到site.cfg文件，打开之后</p>
+<p></p><p><br><a bgcolor="#00ff00"># The path to mysql_config.</a></p><p><br><a># Only use this if mysql_config is not on your PATH, or you have some weird</a></p><p><br><a># setup that requires it.</a></p><p><br><a># mysql_config = /usr/local/bin/mysql_config</a></p><p></p>
+<p>将最后一行去掉注释，路径改为本机的路径：/usr/local/mysql/bin/mysql_config</p>
+<p>然后再次执行：python setup.py install<br>此时可能会报错，如图<br><img src="https://raw.githubusercontent.com/loginSin/blogSource/master/images/python/MySQLdb_python.png" alt="url demo"><br>图中的意思是权限问题，此时使用sudo或者root权限再次执行上面的命令即可<br>sudo python setup.py install</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipo3mxzd000pba1qd41t9w7h" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-python-定义类方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -99,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipm3igva000ru31qa57zxhhq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipo3mxze000qba1qhlqzpt89" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -138,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipm3igv9000qu31qep6wbkv2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipo3mxzi000sba1qlva6q09s" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -179,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipm3igv5000ou31qpie3tmdx" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipo3mxyh000jba1qoveeuz7t" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -218,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipm3igtp0002u31qq5r8lv8f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipo3mxxn0002ba1qiv8cjfp2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -259,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipm3igti0000u31q7loznmdq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipo3mxxg0000ba1qruu9io39" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -298,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipm3igv2000mu31qqeiogcgq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipo3mxyy000mba1q2pgws6qj" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -346,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipm3igtn0001u31qlezf4k8f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipo3mxxr0004ba1q4t8w8bt3" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -384,7 +424,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipm3igv7000pu31qjqnlskpq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipo3mxzg000rba1qk42nak2s" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -439,44 +479,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipm3igvd000su31qvdrumpvu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-NULL-nil-Nil-NSNULL区别" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" class="article-date">
-  <time datetime="2016-05-26T15:59:08.000Z" itemprop="datePublished">2016-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/">iOS开发-NULL/nil/Nil/NSNULL区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>nil是OC的，空对象，地址指向空（0）的对象。对象的字面零值<br>Nil是OC类的字面零值<br>NULL是C的，空地址，地址的数值为0，是个长整数<br>NSNULL用于解决NSArray，NSDictionary等集合中添加空值的问题</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipm3igtv0005u31qoe1xhpcc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipo3mxzl000tba1qj67kanwx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -506,16 +509,20 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/">python-mac安装MySQLdb(Python mysql)</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/18/python-定义类方法/">python-定义类方法</a>
@@ -533,10 +540,6 @@
             <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/">XMPP-mac搭建xmpp服务器(openfire)</a>
           </li>
         
-          <li>
-            <a href="/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/">MySQL-mysql5,7 for Mac 10.11安装</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -550,7 +553,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 登录无奈<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
