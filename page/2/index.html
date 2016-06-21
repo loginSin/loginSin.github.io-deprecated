@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,61 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-python-文件和流-文件读写" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" class="article-date">
+  <time datetime="2016-06-01T15:55:14.000Z" itemprop="datePublished">2016-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/01/python-文件和流-文件读写/">python-文件和流-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#打开文件：<br>open(name[.mode[.buffering]])<br>open函数使用一个文件名作为唯一的强制参数，然后放回一个文件对象。模式（mode）和缓存（buffering）参数都是可选的<br>eg:&gt;&gt; file = open(r”C:/file.txt”)</p>
+<p>#文件模式<br>r    读模式<br>w    写模式<br>a    追加模式<br>b    二进制模式（可添加到其他模式中使用）</p>
+<ul>
+<li>读/写模式（可添加到其他模式中使用）</li>
+</ul>
+<p>注：在UNIX中换行符是\n，而在windows中是\r\n，python会对此进行自动的转换</p>
+<p>#读与写<br>文件的读写需要使用write和read方法（以字符串形式进行读写）<br>写eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”w”)<br>f.write(“hello “)<br>f.write(“world !”)<br>f.close()</p>
+</blockquote>
+</blockquote>
+<p>读eg：</p>
+<blockquote>
+<blockquote>
+<p>f = open(“file.txt”,”r”)<br>f.read(4)<br>‘hell’<br>f.read()<br>‘0 world !’</p>
+</blockquote>
+</blockquote>
+<p>详情请见：<br>Magnus Lie Hetland 《Python基础教程》（第2版.修订版）207~209</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/01/python-文件和流-文件读写/" data-id="cipoubzrh000u461q7lqdbai1" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-iOS开发-NULL-nil-Nil-NSNULL区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipo3q7t90005c81q3r60md6p" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-NULL-nil-Nil-NSNULL区别/" data-id="cipoubzq70007461q4skervqk" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -132,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cipo3q7u7000ic81qdatoexm5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-控件不能交互的原因/" data-id="cipoubzqv000h461qqjina8ez" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -169,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cipo3q7u2000fc81qeu0iyqym" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" data-id="cipoubzqx000i461qm2uotba9" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -207,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipo3q7t70004c81qtxmaqnay" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="cipoubzpz0004461q8we986hn" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -244,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipo3q7t60003c81qow86ftrr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" data-id="cipoubzpx0003461qc7ui9lzj" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -285,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cipo3q7uc000jc81qek09v10i" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-新版CocoaPods相关/" data-id="cipoubzr1000j461q6jy1mrve" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -341,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cipo3q7ug000kc81q1bgc8nh3" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-旧版CocoaPods相关/" data-id="cipoubzr3000k461q2zi8pcyk" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -399,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="cipo3q7ui000lc81q346iiuy7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-调试相关的宏/" data-id="cipoubzr8000o461qjxg20alr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -451,139 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="cipo3q7tc0006c81qnewtpp7a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-使用FMDB进行数据库版本更新" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" class="article-date">
-  <time datetime="2016-05-18T08:51:34.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/">iOS开发-使用FMDB进行数据库版本更新</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#import “DEarDatabaseManager.h”</p>
-<p>#import “FMDatabase.h”</p>
-<p>#import “DEarSandbox.h”</p>
-<p>static NSString *dbVersionKey = @”dbVersionKey”;</p>
-<p>//数据库2.0版本变更<br>//创建新表，包含主键<br>static NSString <em>sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;<br>//将旧表数据复制进新表<br>static NSString </em>sqlUpdateAllData = @”insert into EmpListNew select <em> from EmpList”;<br>//删除旧表<br>static NSString </em>sqlDropOldTable = @”drop table EmpList”;<br>//新表重命名为旧表的名称<br>static NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
-<p>@interface DEarDatabaseManager ()<br>{<br>    FMDatabase *_database;<br>}<br>@end</p>
-<p>@implementation DEarDatabaseManager</p>
-<p>+(instancetype)sharedInstance<br>{<br>    static dispatch_once_t onceToken;<br>    static DEarDatabaseManager *manager;</p>
-<pre><code>dispatch_once(&amp;onceToken, ^{
-    manager = [[DEarDatabaseManager alloc] init];
-});
-
-return manager;
-</code></pre><p>}</p>
-<ul>
-<li>(instancetype)init<br>{<br>  self = [super init];<br>  if (self) {<pre><code>[self configDatabase];
-</code></pre>  }<br>  return self;<br>}</li>
-</ul>
-<p>-(void)configDatabase<br>{<br>    int dbVersion = 1;<br>    NSString *path = [DEarSandbox documentPath:@”dEar.sqlite”];</p>
-<pre><code>_database = [[FMDatabase alloc] initWithPath:path];
-if (!_database.open)
-{
-    NSLog(@&quot;打开失败&quot;);
-    return;
-}
-//如果数据库存在
-if([self isExistDBWithPath:path]){
-    //获取数据库版本号
-    NSString *currentDBVersion = [self p_getCurrentDBVersion];
-    //如果数据库版本号不存在，表示当前刚把数据库创建出来，那么默认数据库的版本号为1
-    if(!currentDBVersion) {
-        currentDBVersion = @&quot;1&quot;;
-    }
-    dbVersion = [currentDBVersion intValue];
-}
-//数据库的版本更新功能，主要就是这个switch
-switch (dbVersion) {
-    case 1:
-    {
-        //创建初始的数据表
-        [self p_createDBWithPath];
-        [self p_setCurrentDBVersion:@&quot;2&quot;];
-    }
-    case 2:
-    {
-        //更新数据表，因为之前的数据表并没有主键，有重复添加员工信息的bug
-        //解决思路是：创建新表，旧表数据复制进新表，删除旧表，新表重命名为旧表的名称
-        [_database executeUpdate:sqlCreateNewTableFor2];
-        [_database executeUpdate:sqlUpdateAllData];
-        [_database executeUpdate:sqlDropOldTable];
-        [_database executeUpdate:sqlRenameTalbe];
-        [self p_setCurrentDBVersion:@&quot;3&quot;];
-    }
-    default:
-        break;
-}
-</code></pre><p>}</p>
-<ul>
-<li><p>(void)p_createDBWithPath{</p>
-<p>  NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;<br>  BOOL result1 = [_database executeUpdate:sql1];<br>  if (!result1)<br>  {</p>
-<pre><code>NSLog(@&quot;创建表EmpList失败！&quot;);
-return;
-</code></pre><p>  }<br>  NSLog(@”创建表EmpList成功！”);<br>}</p>
-</li>
-</ul>
-<p>-(void)addEmpWithEmpName:(NSString <em>)empName deptName:(NSString </em>)deptName companyName:(NSString <em>)companyName empNumber:(NSString </em>)empNumber phone:(NSString *)phone completion:(void (^)(BOOL finished))completion<br>{</p>
-<pre><code>NSString *sql = @&quot;INSERT INTO EmpList (empName, deptName, companyName, empNumber, phone) VALUES (?, ?, ?, ?, ?)&quot;;
-BOOL result = [_database executeUpdate:sql, empName, deptName, companyName, empNumber, phone];
-if (!result)
-{
-    if(completion){
-        NSLog(@&quot;添加声纹失败！&quot;);
-        completion(NO);
-        return;
-    }
-
-}
-NSLog(@&quot;添加声纹成功！&quot;);
-if (completion)
-{
-    completion(YES);
-    return;
-}
-</code></pre><p>}</p>
-<p>-(void)deleteEmpWithActionType:(DEarActionType <em>)action completion:(void (^)(BOOL finished))completion<br>{<br>    NSString </em>sql = @”Delete from EmpList where empName = ?”;<br>    BOOL result = [_database executeUpdate:sql, action.empName];<br>    if (!result)<br>    {<br>        NSLog(@”删除声纹失败！”);<br>        return;<br>    }<br>    NSLog(@”删除声纹成功！”);<br>    if (completion)<br>    {<br>        completion(YES);<br>    }<br>}</p>
-<p>-(NSArray <em>)allEmps<br>{<br>    NSMutableArray </em>marr = [[NSMutableArray alloc] init];<br>    NSString <em>sql = @”select </em> from EmpList”;<br>    FMResultSet <em>result = [_database executeQuery:sql];<br>    while ([result next])<br>    {<br>        DEarActionType </em>action = [[DEarActionType alloc] init];<br>        action.empName = [result stringForColumn:@”empName”];<br>        action.deptName = [result stringForColumn:@”deptName”];<br>        action.companyName = [result stringForColumn:@”companyName”];<br>        action.empNumber = [result stringForColumn:@”empNumber”];<br>        action.phone = [result stringForColumn:@”phone”];<br>        [marr addObject:action];<br>    }<br>    return marr;<br>}</p>
-<ul>
-<li><p>(BOOL)isExistDBWithPath:(NSString *)path {<br>  return [DEarSandbox fileExists:path];<br>}</p>
-</li>
-<li><p>(void)p_setCurrentDBVersion:(NSString *)dbVersion {<br>  [[NSUserDefaults standardUserDefaults] setValue:dbVersion forKey:dbVersionKey];<br>}</p>
-</li>
-<li><p>(NSString *)p_getCurrentDBVersion {</p>
-<p>  return [[NSUserDefaults standardUserDefaults] valueForKey:dbVersionKey];<br>}</p>
-</li>
-</ul>
-<p>@end</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="cipo3q7tm000ac81qi5dtzcwl" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="cipoubzq80008461qtm589jip" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -596,7 +519,7 @@ if (completion)
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/loginSin.github.io/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/loginSin.github.io/page/3/">3</a><a class="extend next" rel="next" href="/loginSin.github.io/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/loginSin.github.io/">&laquo; __('prev')</a><a class="page-number" href="/loginSin.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/loginSin.github.io/page/3/">3</a><a class="page-number" href="/loginSin.github.io/page/4/">4</a><a class="extend next" rel="next" href="/loginSin.github.io/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -613,16 +536,20 @@ if (completion)
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/">python-mac_mysql链接出错</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/">python-mac安装MySQLdb(Python mysql)</a>
@@ -640,10 +567,6 @@ if (completion)
             <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
           </li>
         
-          <li>
-            <a href="/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/">XMPP-mac搭建xmpp服务器(openfire)</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -657,7 +580,7 @@ if (completion)
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 登录无奈<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
