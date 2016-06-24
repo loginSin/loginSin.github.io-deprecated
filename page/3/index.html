@@ -68,6 +68,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-iOS开发-SQLite设置主键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" class="article-date">
+  <time datetime="2016-05-18T08:53:05.000Z" itemprop="datePublished">2016-05-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/">iOS开发-SQLite设置主键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>SQLite命令大全：<br><a href="http://www.runoob.com/sqlite/sqlite-alter-command.html" target="_blank" rel="external">http://www.runoob.com/sqlite/sqlite-alter-command.html</a></p>
+<p>如果项目的第一版使用数据库忘了设置主键，那么后续可能会引起一些问题。</p>
+<p>sqlite3.5确实没有alter table t drop constraint <em>, alter table t add constraint primary key </em>的用法</p>
+<p>不过，也有解决方案，不会有太大的影响</p>
+<p>解决思路是：</p>
+<p>建新表–&gt;旧表数据复制进新表–&gt;删旧表–&gt;新表重命名为旧表的名称<br>//原始的表结构</p>
+<p>1.NSString *sql1 = @”CREATE TABLE IF NOT EXISTS EmpList(empName text, deptName text, companyName text, empNumber text, phone text)”;</p>
+<p>//新的表结构</p>
+<p>2.NSString *sqlCreateNewTableFor2 = @”CREATE TABLE IF NOT EXISTS EmpListNew(empName text, deptName text, companyName text, empNumber text primary key, phone text)”;</p>
+<p>//将旧表数据复制进新表</p>
+<p>3.NSString <em>sqlUpdateAllData = @”insert into EmpListNew select </em> from EmpList”;</p>
+<p>//删除旧表</p>
+<p>4.NSString *sqlDropOldTable = @”drop table EmpList”;</p>
+<p>//把新表命名为旧表</p>
+<p>5.NSString *sqlRenameTalbe = @”ALTER TABLE EmpListNew RENAME TO EmpList”;</p>
+<p>使用FMDB来执行上面的sql语句既可以了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-SQLite设置主键/" data-id="ciptldsmr00060d1qvv7cv70z" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-iOS开发-使用FMDB进行数据库版本更新" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" class="article-date">
@@ -190,7 +242,7 @@ if (completion)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="cipoubzqg000b461qkl8w8dks" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用FMDB进行数据库版本更新/" data-id="ciptldsn1000a0d1q16pyhcpr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -243,7 +295,7 @@ if (completion)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="cipoubzqf000a461qbnft7yzu" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用宏精简代码/" data-id="ciptldsn2000b0d1qx7ikzr9x" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -303,7 +355,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="cipoubzqi000d461qm3u7mnv9" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用的一些宏/" data-id="ciptldsnj000h0d1qoziizbns" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -342,7 +394,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="cipoubzqk000e461qcptpdsai" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装appledoc/" data-id="ciptldsn9000g0d1qyb737di4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -382,7 +434,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="cipoubzqu000g461qqyvzu85u" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-安装VVDocumenter/" data-id="ciptldsn4000d0d1q2cnwsc9p" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -459,7 +511,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="cipoubzqh000c461qobw7i0jf" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-使用appledoc自动生成文档/" data-id="ciptldsn3000c0d1qnho322c0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -507,7 +559,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="cipoubzr5000l461q0yegmc53" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-解压.a静态库/" data-id="ciptldso5000r0d1qr5zxvnom" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -569,7 +621,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="cipoubzqt000f461qeo3v2s3u" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-制作.a静态库-支持bitcode/" data-id="ciptldsn7000f0d1qgn5noed6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -608,44 +660,7 @@ void TFLog(NSString *format, ...);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="cipoubzq40006461qzv4zeq6y" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-iOS开发-mac显示隐藏文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" class="article-date">
-  <time datetime="2016-05-18T03:17:06.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/">mac显示隐藏文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>defaults write com.apple.finder AppleShowAllFiles -bool true 显示隐藏文件<br>defaults write com.apple.finder AppleShowAllFiles -bool false 关闭显示隐藏文件</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac显示隐藏文件/" data-id="cipoubzqd0009461q9kgj1jio" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/18/iOS开发-mac创建root用户/" data-id="ciptldsmw00080d1q592qf1x7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -675,7 +690,7 @@ void TFLog(NSString *format, ...);
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
@@ -685,6 +700,10 @@ void TFLog(NSString *format, ...);
     <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/">python-urllib2实现网页下载器</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/">python-mac_mysql链接出错</a>
@@ -700,10 +719,6 @@ void TFLog(NSString *format, ...);
         
           <li>
             <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/">python-动态添加方法</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
           </li>
         
       </ul>

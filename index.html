@@ -68,6 +68,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python-urllib2实现网页下载器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" class="article-date">
+  <time datetime="2016-06-24T10:00:56.000Z" itemprop="datePublished">2016-06-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/">python-urllib2实现网页下载器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用urllib2来实现网页下载器有3种方法<br>1：最简单的方法：</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2</p>
+<p>#直接请求网页<br>response = urllib2.urlopen(“<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“)</p>
+<p>#获取状态码，如果是200表示成功<br>print (response.getcode())</p>
+<p>#读取内容<br>cont = response.read()<br>print (cont);</p>
+<p>2:添加data、http header</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2</p>
+<p>#创建Request对象<br>url = “<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“<br>req = urllib2.Request(url);</p>
+<p>#添加数据<br>req.add_data(‘a’,’1’)</p>
+<p>#添加http的header<br>req.add_header(‘User-Agent’,’Mozilla/5.0’)</p>
+<p>#发送请求获取数据<br>response = urllib2.urlopen(req)<br>3：添加特殊情景的处理器<br>HTTPCooKieProcessor(需要cookie访问的网页)<br>ProxyHandler(需要代理才能访问的网页)<br>HTPPSHandler(使用https加密访问的网页)<br>HTTPRedirectHandler(url相互自动跳转的网页)</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2,cookielib</p>
+<p>#创建cookie容器<br>cj = cookielib.CookieJar()</p>
+<p>#创建一个opener<br>opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))</p>
+<p>#给urllib2安装opener<br>urllib2.install_opener(opener)</p>
+<p>#使用带有cookie的urllib2访问网页<br>response = urllib2.urlopen(“<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="ciptldsnz000p0d1qflo015uv" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python-mac-mysql链接出错" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" class="article-date">
@@ -95,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipoubzr7000n461qqm8k9y5e" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="ciptldsnv000m0d1q5gulji1g" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -134,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipoubzre000s461qmgy1xltq" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="ciptldsnw000n0d1qnpjxpcw0" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -175,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipoubzrc000r461qmys757cx" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="ciptldsof000v0d1qt4o56dhr" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -214,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipoubzra000q461qk8g3clbf" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="ciptldsod000u0d1q4h8o6v9f" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -255,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipoubzr6000m461q1q14xmyn" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="ciptldso1000q0d1q9iy02ip6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -294,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipoubzpv0002461qrtqzi0b6" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="ciptldsmk00020d1qp4l9tuy8" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -335,7 +387,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipoubzpn0000461q3iehfq16" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="ciptldsmc00000d1q0qikulx2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -374,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipoubzr9000p461qm4cmnao9" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="ciptldsnu000l0d1qm8w74vz6" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -422,45 +474,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="cipoubzps0001461qo5t6tjst" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python-文件与流-管式输出" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" class="article-date">
-  <time datetime="2016-06-01T16:08:07.000Z" itemprop="datePublished">2016-06-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/06/02/python-文件与流-管式输出/">python-文件与流-管式输出</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在UNIX的shell中（就像GNU bash）中，使用管道可以在一个命令后面续写其他的多个命令，eg：$cat file.txt | python pyScript.py | sort</p>
-<p>代码清单（pyScript.py）<br>import sys<br>text = sys.stdin.read()<br>words = text.split()<br>wordCount = len(words)<br>print(“len:”,wordCount)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/02/python-文件与流-管式输出/" data-id="cipoubzrg000t461q7scvkqcf" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="ciptldsmh00010d1qqq5qq53f" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -490,7 +504,7 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
@@ -500,6 +514,10 @@
     <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/">python-urllib2实现网页下载器</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/">python-mac_mysql链接出错</a>
@@ -515,10 +533,6 @@
         
           <li>
             <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/">python-动态添加方法</a>
-          </li>
-        
-          <li>
-            <a href="/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/">markdown-添加图片和超链接</a>
           </li>
         
       </ul>

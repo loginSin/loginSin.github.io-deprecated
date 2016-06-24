@@ -3,21 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS开发-MRC与ARC混编 | 登录无奈 · 博客</title>
+  <title>python-urllib2实现网页下载器 | 登录无奈 · 博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ARC项目添加MRC类：在Xcode的Target的Build phases选项下的Compile Source下，将MRC相关类后面双击添加 -fno-objc-arc
-MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添加 -fobjc-arc">
+  <meta name="description" content="使用urllib2来实现网页下载器有3种方法1：最简单的方法：
+#-- coding: UTF-8 --import urllib2
+#直接请求网页response = urllib2.urlopen(“http://www.baidu.com“)
+#获取状态码，如果是200表示成功print (response.getcode())
+#读取内容cont = response.read()prin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发-MRC与ARC混编">
-<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/index.html">
+<meta property="og:title" content="python-urllib2实现网页下载器">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/index.html">
 <meta property="og:site_name" content="登录无奈 · 博客">
-<meta property="og:description" content="ARC项目添加MRC类：在Xcode的Target的Build phases选项下的Compile Source下，将MRC相关类后面双击添加 -fno-objc-arc
-MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添加 -fobjc-arc">
-<meta property="og:updated_time" content="2016-05-26T15:41:16.000Z">
+<meta property="og:description" content="使用urllib2来实现网页下载器有3种方法1：最简单的方法：
+#-- coding: UTF-8 --import urllib2
+#直接请求网页response = urllib2.urlopen(“http://www.baidu.com“)
+#获取状态码，如果是200表示成功print (response.getcode())
+#读取内容cont = response.read()prin">
+<meta property="og:updated_time" content="2016-06-24T10:25:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发-MRC与ARC混编">
-<meta name="twitter:description" content="ARC项目添加MRC类：在Xcode的Target的Build phases选项下的Compile Source下，将MRC相关类后面双击添加 -fno-objc-arc
-MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添加 -fobjc-arc">
+<meta name="twitter:title" content="python-urllib2实现网页下载器">
+<meta name="twitter:description" content="使用urllib2来实现网页下载器有3种方法1：最简单的方法：
+#-- coding: UTF-8 --import urllib2
+#直接请求网页response = urllib2.urlopen(“http://www.baidu.com“)
+#获取状态码，如果是200表示成功print (response.getcode())
+#读取内容cont = response.read()prin">
   
     <link rel="alternate" href="/atom.xml" title="登录无奈 · 博客" type="application/atom+xml">
   
@@ -70,10 +79,10 @@ MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-iOS开发-MRC与ARC混编" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-python-urllib2实现网页下载器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" class="article-date">
-  <time datetime="2016-05-26T15:37:47.000Z" itemprop="datePublished">2016-05-26</time>
+    <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" class="article-date">
+  <time datetime="2016-06-24T10:00:56.000Z" itemprop="datePublished">2016-06-24</time>
 </a>
     
   </div>
@@ -84,7 +93,7 @@ MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添�
         
   
     <h1 class="article-title" itemprop="name">
-      iOS开发-MRC与ARC混编
+      python-urllib2实现网页下载器
     </h1>
   
 
@@ -92,13 +101,27 @@ MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ARC项目添加MRC类：<br>在Xcode的Target的Build phases选项下的Compile Source下，将MRC相关类后面双击添加 -fno-objc-arc</p>
-<p>MRC项目添加ARC类：<br>在同样的位置下，将ARC相关类后面双击添加 -fobjc-arc</p>
+        <p>使用urllib2来实现网页下载器有3种方法<br>1：最简单的方法：</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2</p>
+<p>#直接请求网页<br>response = urllib2.urlopen(“<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“)</p>
+<p>#获取状态码，如果是200表示成功<br>print (response.getcode())</p>
+<p>#读取内容<br>cont = response.read()<br>print (cont);</p>
+<p>2:添加data、http header</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2</p>
+<p>#创建Request对象<br>url = “<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“<br>req = urllib2.Request(url);</p>
+<p>#添加数据<br>req.add_data(‘a’,’1’)</p>
+<p>#添加http的header<br>req.add_header(‘User-Agent’,’Mozilla/5.0’)</p>
+<p>#发送请求获取数据<br>response = urllib2.urlopen(req)<br>3：添加特殊情景的处理器<br>HTTPCooKieProcessor(需要cookie访问的网页)<br>ProxyHandler(需要代理才能访问的网页)<br>HTPPSHandler(使用https加密访问的网页)<br>HTTPRedirectHandler(url相互自动跳转的网页)</p>
+<p>#-<em>- coding: UTF-8 -</em>-<br>import urllib2,cookielib</p>
+<p>#创建cookie容器<br>cj = cookielib.CookieJar()</p>
+<p>#创建一个opener<br>opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))</p>
+<p>#给urllib2安装opener<br>urllib2.install_opener(opener)</p>
+<p>#使用带有cookie的urllib2访问网页<br>response = urllib2.urlopen(“<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/" data-id="ciptldsmo00040d1q64on9r9a" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="ciptldsnz000p0d1qflo015uv" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -107,19 +130,10 @@ MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添�
     
 <nav id="article-nav">
   
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-响应者链条顺序/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          iOS开发-响应者链条顺序
-        
-      </div>
-    </a>
   
-  
-    <a href="/loginSin.github.io/2016/05/26/iOS开发-CocoaPods更新慢/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">iOS开发-CocoaPods更新慢</div>
+      <div class="article-nav-title">python-mac_mysql链接出错</div>
     </a>
   
 </nav>
@@ -130,7 +144,7 @@ MRC项目添加ARC类：在同样的位置下，将ARC相关类后面双击添�
 
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-iOS开发-MRC与ARC混编" data-title="iOS开发-MRC与ARC混编" data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/05/26/iOS开发-MRC与ARC混编/"></div>
+    <div class="ds-thread" data-thread-key="post-python-urllib2实现网页下载器" data-title="python-urllib2实现网页下载器" data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
