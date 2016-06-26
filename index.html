@@ -121,11 +121,12 @@ except:
 <p>#coding=utf-8<br>import re,urllib2<br>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]<br>buf = urllib2.urlopen(url)<br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))<br>for image_type in image_type_arr:<br>    i=0<br>    for u in urllist:<br>        try:<br>            if image_type in u:<br>                new_url = u[:u.find(image_type)+len(image_type)]<br>                print (“crawl image %d:%s”%(i+1,new_url))<br>                f = open(str(i)+”.”+image_type,’w’)<br>                data = urllib2.urlopen(new_url)<br>                f.write(data.read())<br>                i += 1<br>        except:<br>            print (“crawl image failed:%s” %u)</p>
 <p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
 <p>3、level3(抓取百度图片的图片数据)<br>百度貌似进行了处理，无法使用上面的脚本进行图片的抓取，但是我们任何将抓取到的链接通过浏览器获取，所以我个人认为，百度在收到请求的时候加了一些处理，只让浏览器能够获取数据，但是目前我尚不清楚如何将python请求伪装成正常的浏览器请求，所以抓取百度图片我暂时也没有办法，等我找到解决方案，我会贴出来的</p>
+<p>最后送出一个《妖精的尾巴》漫画下载器，下载第1话至第490话<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/fairaytail_downloader.py" target="_blank" rel="external">脚本传送门:image_spder3.py”&gt;妖精的尾巴</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipw9brdh000wnt1q7rsmdu1s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipwg2gvm000twj1qwcx4bruv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +179,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="cipw9brd5000qnt1q8i0xo731" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="cipwg2gvq000vwj1qkbmce2nc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +216,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipw9brd4000pnt1qb431x1n5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipwg2gvb000qwj1q52la9d8e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,7 +255,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipw9brd9000snt1q5z4muink" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipwg2gva000pwj1qnbnqezbg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -295,7 +296,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipw9brdb000tnt1qdz97du3x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipwg2gvf000rwj1qladqwytw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -334,7 +335,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipw9brd6000rnt1qdfhzhtrk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipwg2gvo000uwj1qt2x2q94a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +376,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipw9brd1000ont1q5c5f64h9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipwg2guz000owj1qbkr2yz8o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -414,7 +415,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipw9brbi0002nt1qwxw8epwj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipwg2gtj0001wj1qbklkt2u2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -455,7 +456,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipw9brba0000nt1qjmwoertj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipwg2gte0000wj1q1pa8s3tl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -494,7 +495,7 @@ except:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipw9brcz000nnt1q1ledirhj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipwg2gux000nwj1qba0wn9ck" class="article-share-link">Share</a>
       
       
     </footer>
