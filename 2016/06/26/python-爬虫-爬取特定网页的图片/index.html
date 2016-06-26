@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>python-爬虫-爬取特定网页的图片 | 登录无奈 · 博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="环境python2.7网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源网络图片的链接一般是http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-爬虫-爬取特定网页的图片">
+<meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/index.html">
+<meta property="og:site_name" content="登录无奈 · 博客">
+<meta property="og:description" content="环境python2.7网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源网络图片的链接一般是http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接">
+<meta property="og:updated_time" content="2016-06-26T07:06:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-爬虫-爬取特定网页的图片">
+<meta name="twitter:description" content="环境python2.7网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源网络图片的链接一般是http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接">
+  
+    <link rel="alternate" href="/atom.xml" title="登录无奈 · 博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/loginSin.github.io/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/loginSin.github.io/" id="logo">登录无奈 · 博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/loginSin.github.io/" id="subtitle">人生鸡汤那么多，没事来点砒霜喝</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/loginSin.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python-爬虫-爬取特定网页的图片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" class="article-date">
+  <time datetime="2016-06-26T05:26:38.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python-爬虫-爬取特定网页的图片
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>环境python2.7<br>网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源<br>网络图片的链接一般是<a href="http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到" target="_blank" rel="external">http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到</a><br>使用到python的urllib2和re模块，一个负责网络请求，一个负责正则匹配来获取图片链接<br>图片会保存在脚本所在的文件夹用并且以数字命名<br>下面就开始吧<br>1、level(抓取慕课网的课程列表页面的图片)</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://www.imooc.com/course/list" target="_blank" rel="external">http://www.imooc.com/course/list</a>“</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>#通过正则表达是来获取图片链接列表</p>
+<p>#该正则表达式的意思是匹配网页中以“<a href="http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接" target="_blank" rel="external">http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接</a><br>urllist = re.findall(r”<a href="http://.+\.jpg&quot;,buf.read(" target="_blank" rel="external">http://.+\.jpg&quot;,buf.read(</a>))</p>
+<p>i=0</p>
+<p>for u in urllist:<br>    print (“crawl image %d : %s”%(i+1,u))<br>    image_data = urllib2.urlopen(u)<br>    f = open(str(i)+”.jpg”,’w’)<br>    f.write(image_data.read())<br>    i+=1<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider1.py" target="_blank" rel="external">脚本传送门:image_spder1.py</a><br>2、level2(抓取拉钩首页的图片)<br>上一个脚本只能应对最为简单的情况，因为获取正则表达式匹配到的链接，并没有进行任何检测或者处理，直接发送请求，但是如果正则匹配到的链接有问题，就需要对正则的结果进行处理，而拉钩网就属于这种情况</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://www.lagou.com/" target="_blank" rel="external">http://www.lagou.com/</a>“</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>#将正则简化，这样就能匹配到所有以“<a href="http://”开头的所有的字符串" target="_blank" rel="external">http://”开头的所有的字符串</a><br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
+<p>i=0</p>
+<p>for u in urllist:</p>
+<pre><code>#并不是所有图片的链接都能拿到数据，所以添加了try
+try:
+    #将正则结果中含有png的过滤出来
+    if &quot;png&quot; in u:
+        #将过滤后的图片链接进行截取以为有可能会出现以下的情况
+        #http://****png****
+        #http://****.png
+        #http://****.png*****
+        new_url = u[:u.find(&quot;png&quot;)+3]
+        #经过截取之后就会变成下面这种合法的图片链接
+        #http://****png
+        #http://****.png
+        #http://****.png            
+        print (&quot;crawl image %d:%s&quot;%(i+1,new_url))
+        f = open(str(i)+&quot;.png&quot;,&apos;w&apos;)
+        data = urllib2.urlopen(new_url)
+        f.write(data.read())
+        i += 1
+except:
+    print (&quot;crawl image failed:%s&quot; %u)
+</code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider2.py" target="_blank" rel="external">脚本传送门:image_spder2.py</a></p>
+<p>2.1、level2.1(优化)<br>上面的那个脚本的通用性就比较高了，增大了正则表达的范围，又将图片链接进行了过滤和截取，但是还需要进行一些优化，如果仔细看上面的脚本会发现只是针对png图片的，如果想要抓取jpg图片就需要将所有的png换成jpg，这是我们可以增减一个数组来保存你想要抓取的图片的类型，然后用for循环抓取该网页所有的类型的图片资源（通常情况下只有jpg和png两种，但是不排除特殊情况比如gif）</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
+<p>for image_type in image_type_arr:</p>
+<pre><code>i=0
+
+for u in urllist:
+    try:
+        if image_type in u:
+            new_url = u[:u.find(image_type)+len(image_type)]
+            print (&quot;crawl image %d:%s&quot;%(i+1,new_url))
+            f = open(str(i)+&quot;.&quot;+image_type,&apos;w&apos;)
+            data = urllib2.urlopen(new_url)
+            f.write(data.read())
+            i += 1
+    except:
+        print (&quot;crawl image failed:%s&quot; %u)
+</code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
+<p>3、level3(抓取百度图片的图片数据)<br>百度貌似进行了处理，无法使用上面的脚本进行图片的抓取，但是我们任何将抓取到的链接通过浏览器获取，所以我个人认为，百度在收到请求的时候加了一些处理，只让浏览器能够获取数据，但是目前我尚不清楚如何将python请求伪装成正常的浏览器请求，所以抓取百度图片我暂时也没有办法，等我找到解决方案，我会贴出来的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipw959l8000vn51quun36vvi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python-urllib2实现网页下载器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-python-爬虫-爬取特定网页的图片" data-title="python-爬虫-爬取特定网页的图片" data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'loginSin'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  </section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget tag">
+    <h3 class="title">归档</h3>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/">python-爬虫-爬取特定网页的图片</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/">python-urllib2实现网页下载器</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/">python-mac_mysql链接出错</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/">python-mac安装MySQLdb(Python mysql)</a>
+          </li>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/18/python-定义类方法/">python-定义类方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 登录无奈<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/loginSin.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/loginSin.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/loginSin.github.io/fancybox/jquery.fancybox.css">
+  <script src="/loginSin.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/loginSin.github.io/js/script.js"></script>
+
+  </div>
+</body>
+</html>

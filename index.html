@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/loginSin/loginSin.github.io"></form>
@@ -67,6 +67,101 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-python-爬虫-爬取特定网页的图片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" class="article-date">
+  <time datetime="2016-06-26T05:26:38.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/">python-爬虫-爬取特定网页的图片</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>环境python2.7<br>网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源<br>网络图片的链接一般是<a href="http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到" target="_blank" rel="external">http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到</a><br>使用到python的urllib2和re模块，一个负责网络请求，一个负责正则匹配来获取图片链接<br>图片会保存在脚本所在的文件夹用并且以数字命名<br>下面就开始吧<br>1、level(抓取慕课网的课程列表页面的图片)</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://www.imooc.com/course/list" target="_blank" rel="external">http://www.imooc.com/course/list</a>“</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>#通过正则表达是来获取图片链接列表</p>
+<p>#该正则表达式的意思是匹配网页中以“<a href="http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接" target="_blank" rel="external">http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接</a><br>urllist = re.findall(r”<a href="http://.+\.jpg&quot;,buf.read(" target="_blank" rel="external">http://.+\.jpg&quot;,buf.read(</a>))</p>
+<p>i=0</p>
+<p>for u in urllist:<br>    print (“crawl image %d : %s”%(i+1,u))<br>    image_data = urllib2.urlopen(u)<br>    f = open(str(i)+”.jpg”,’w’)<br>    f.write(image_data.read())<br>    i+=1<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider1.py" target="_blank" rel="external">脚本传送门:image_spder1.py</a><br>2、level2(抓取拉钩首页的图片)<br>上一个脚本只能应对最为简单的情况，因为获取正则表达式匹配到的链接，并没有进行任何检测或者处理，直接发送请求，但是如果正则匹配到的链接有问题，就需要对正则的结果进行处理，而拉钩网就属于这种情况</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://www.lagou.com/" target="_blank" rel="external">http://www.lagou.com/</a>“</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>#将正则简化，这样就能匹配到所有以“<a href="http://”开头的所有的字符串" target="_blank" rel="external">http://”开头的所有的字符串</a><br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
+<p>i=0</p>
+<p>for u in urllist:</p>
+<pre><code>#并不是所有图片的链接都能拿到数据，所以添加了try
+try:
+    #将正则结果中含有png的过滤出来
+    if &quot;png&quot; in u:
+        #将过滤后的图片链接进行截取以为有可能会出现以下的情况
+        #http://****png****
+        #http://****.png
+        #http://****.png*****
+        new_url = u[:u.find(&quot;png&quot;)+3]
+        #经过截取之后就会变成下面这种合法的图片链接
+        #http://****png
+        #http://****.png
+        #http://****.png            
+        print (&quot;crawl image %d:%s&quot;%(i+1,new_url))
+        f = open(str(i)+&quot;.png&quot;,&apos;w&apos;)
+        data = urllib2.urlopen(new_url)
+        f.write(data.read())
+        i += 1
+except:
+    print (&quot;crawl image failed:%s&quot; %u)
+</code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider2.py" target="_blank" rel="external">脚本传送门:image_spder2.py</a></p>
+<p>2.1、level2.1(优化)<br>上面的那个脚本的通用性就比较高了，增大了正则表达的范围，又将图片链接进行了过滤和截取，但是还需要进行一些优化，如果仔细看上面的脚本会发现只是针对png图片的，如果想要抓取jpg图片就需要将所有的png换成jpg，这是我们可以增减一个数组来保存你想要抓取的图片的类型，然后用for循环抓取该网页所有的类型的图片资源（通常情况下只有jpg和png两种，但是不排除特殊情况比如gif）</p>
+<p>#coding=utf-8</p>
+<p>import re,urllib2</p>
+<p>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]</p>
+<p>buf = urllib2.urlopen(url)</p>
+<p>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
+<p>for image_type in image_type_arr:</p>
+<pre><code>i=0
+
+for u in urllist:
+    try:
+        if image_type in u:
+            new_url = u[:u.find(image_type)+len(image_type)]
+            print (&quot;crawl image %d:%s&quot;%(i+1,new_url))
+            f = open(str(i)+&quot;.&quot;+image_type,&apos;w&apos;)
+            data = urllib2.urlopen(new_url)
+            f.write(data.read())
+            i += 1
+    except:
+        print (&quot;crawl image failed:%s&quot; %u)
+</code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
+<p>3、level3(抓取百度图片的图片数据)<br>百度貌似进行了处理，无法使用上面的脚本进行图片的抓取，但是我们任何将抓取到的链接通过浏览器获取，所以我个人认为，百度在收到请求的时候加了一些处理，只让浏览器能够获取数据，但是目前我尚不清楚如何将python请求伪装成正常的浏览器请求，所以抓取百度图片我暂时也没有办法，等我找到解决方案，我会贴出来的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipw959l8000vn51quun36vvi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-python-urllib2实现网页下载器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -111,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="ciptm7eo0000o281qpj6fm6mx" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="cipw959kz000qn51qn1oxlj51" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="ciptm7enx000m281q9wovbbpf" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipw959kt000mn51qv8jqsq99" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="ciptm7enz000n281qv6zbtl3l" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipw959l6000tn51qt7zpfpz2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="ciptm7eoa000t281q9x4231cj" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipw959l4000sn51qdga7c4dg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -267,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="ciptm7eob000u281q6wtrj5v7" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipw959l1000rn51qwa3l2uns" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="ciptm7eod000v281qh1ffyvc0" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipw959kv000nn51qsxp187re" class="article-share-link">Share</a>
       
       
     </footer>
@@ -347,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="ciptm7emf0001281qxijabeb0" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipw959jj0004n51q5k53bml8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -388,7 +483,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="ciptm7em90000281q0k3zsb76" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipw959j80000n51qmp035ox4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,55 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="ciptm7ens000k281qac535jmr" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SQL注入-入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/loginSin.github.io/2016/06/06/SQL注入-入门/" class="article-date">
-  <time datetime="2016-06-06T09:11:33.000Z" itemprop="datePublished">2016-06-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/loginSin.github.io/2016/06/06/SQL注入-入门/">SQL注入-入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>SQL注入（sql injection）<br>本例以J2EE为例</p>
-<p>先做一下准备工作<br>开发工具：eclipse Mars，MySql，tomcat（eclipse Mars自带的tomcat也行）<br>调试工具：随便来个浏览器就行<br>相关知识：servlet，java连接数据库，数据库查询，sql语句，GET/POST请求原理<br>相关知识有任何问题建议百度谷歌走一遭</p>
-<p>先讲一下我们登录的一般流程：<br>当我们使用浏览器进入某些网站输入账号密码登录的时候，<br>浏览器会通过GET或者POST请求（GET请求将账号密码放在在URL中，POST请求将账号密码放在请求体中，绝大多数以form表单形式post给服务器）<br>将我们的账号密码发送给服务器（某些网站会对用户信息进行加密上传，而有些不会），<br>服务器接收到我们的账号密码之后就会形成一个条sql语句，从数据出查询是否存在该账号与密码<br>如果存在就会提示登录成功进入下一个界面，如果不存在那么就错误会提示账号密码错误</p>
-<p>那么我们说好的sql注入该怎么用？<br>先下载一下我写的服务器代码，在eclipse上运行（我是用的是eclipse mars，里面自带tomcat），服务器代码的git地址：<br><a href="https://github.com/loginSin/SQLInjectionServer">https://github.com/loginSin/SQLInjectionServer</a></p>
-<p>我们以GET为例（因为我比较懒没有画界面），在地址栏输入账号密码点击登录之后，会形成一个URL：<br><a href="http://localhost:8080/SQLInjection/login?account=123&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123&amp;password=123</a><br>之后服务器进入servlet会获取到account和password的值<br>String account = request.getParameter(“account”);<br>String password = request.getParameter(“password”);<br>拿到浏览器传来的账号密码，服务器形成一条这样的sql语句，开始从数据查询数据<br>select  *  from user where account = 123 and password =123<br>如果执行完sql之后得到相应的用户数据，那么就登录成功，否则失败，这个是最一般的流程</p>
-<p>接下来我们开始注入<br>“–”的注释作用<br>将上面的url添加一个“–”，这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123--&amp;password=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123--&amp;password=123</a><br>我们会惊奇的发现也是登录成功，原因是服务器拿到数据之后拼接成的sql语句变成了<br>select  <em>  from user where account = 123– and password =123<br>因为“–”在sql语句中意思是注释掉后面的内容，所以上面的sql的真正表达是<br>select  </em>  from user where account = 123<br>意思是查找账号为123的用户是否存在，直接忽略掉了后半段的查找密码的过程</p>
-<p>“or 1=1”的作用<br>如果url这么写<br><a href="http://localhost:8080/SQLInjection/login?account=123" target="_blank" rel="external">http://localhost:8080/SQLInjection/login?account=123</a> or 1=1&amp;password=123<br>也会登录成功，sql语句变成了<br>select  *  from user where account = 123 or 1=1 and password =123<br>也会把后半段的验证密码给忽略掉</p>
-<p>具有类似功能的还有<br>or 1=1–<br>or ‘a’=’a’</p>
-<p>如果某些网站以上介绍的都不行，有可能是网站对sql注入进行了防范，可能需要进行一些特殊的处理<br>or 1=1<br>‘ or 1=1–<br>“ or 1=1–<br>‘ or ‘a’=’a’<br>“ or ‘a’=’a’<br>‘) or (‘a’=’a’<br>如果还不行，我建议还是换个，或者自己搭建一个服务器</p>
-<p>本人这方面也是小白，SQL注入的内容也是查看网上相关内容自学，有什么问题可以相互讨论</p>
-<p>服务端代码：<a href="https://github.com/loginSin/SQLInjectionServer">https://github.com/loginSin/SQLInjectionServer</a></p>
-<p>附录：<br>sql的注释有三种/<em>*/和–和#<br>1）/</em>需要和<em>/配对使用，不好控制</em>/是的位置，所以不常用<br>2）适用于Microsoft SQL Server，而MySql用–后面要加空格<br>当使用–后跟空格的时候，在url的转义为–%20<br>3）使用#来注释MySql</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/06/SQL注入-入门/" data-id="ciptm7emi0002281qd1f8ij6m" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipw959ky000pn51qlitie3fy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -505,16 +552,20 @@
     
   <div class="widget tag">
     <h3 class="title">归档</h3>
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
+    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/06/">2016年06月</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/loginSin.github.io/archives/2016/05/">2016年05月</a><span class="archive-list-count">20</span></li></ul>
   </div>
 
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/">python-爬虫-爬取特定网页的图片</a>
+          </li>
         
           <li>
             <a href="/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/">python-urllib2实现网页下载器</a>
@@ -532,10 +583,6 @@
             <a href="/loginSin.github.io/2016/06/18/python-定义类方法/">python-定义类方法</a>
           </li>
         
-          <li>
-            <a href="/loginSin.github.io/2016/06/18/python-动态添加方法/">python-动态添加方法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -549,7 +596,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 登录无奈<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
