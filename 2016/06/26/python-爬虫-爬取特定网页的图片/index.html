@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://github.com/loginSin/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/index.html">
 <meta property="og:site_name" content="登录无奈 · 博客">
 <meta property="og:description" content="环境python2.7网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源,网络图片的链接一般是http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合上述特定的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到使用到py">
-<meta property="og:updated_time" content="2016-06-26T10:20:04.000Z">
+<meta property="og:updated_time" content="2016-06-26T10:25:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python-爬虫-爬取特定网页的图片">
 <meta name="twitter:description" content="环境python2.7网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源,网络图片的链接一般是http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合上述特定的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到使用到py">
@@ -120,12 +120,11 @@ except:
 <p>#coding=utf-8<br>import re,urllib2<br>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]<br>buf = urllib2.urlopen(url)<br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))<br>for image_type in image_type_arr:<br>    i=0<br>    for u in urllist:<br>        try:<br>            if image_type in u:<br>                new_url = u[:u.find(image_type)+len(image_type)]<br>                print (“crawl image %d:%s”%(i+1,new_url))<br>                f = open(str(i)+”.”+image_type,’w’)<br>                data = urllib2.urlopen(new_url)<br>                f.write(data.read())<br>                i += 1<br>        except:<br>            print (“crawl image failed:%s” %u)</p>
 <p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
 <p>3、level3(抓取百度图片的图片数据)<br>百度貌似进行了处理，无法使用上面的脚本进行图片的抓取，但是我们任何将抓取到的链接通过浏览器获取，所以我个人认为，百度在收到请求的时候加了一些处理，只让浏览器能够获取数据，但是目前我尚不清楚如何将python请求伪装成正常的浏览器请求，所以抓取百度图片我暂时也没有办法，等我找到解决方案，我会贴出来的</p>
-<p>最后送出一个《妖精的尾巴》漫画下载器，下载第1话至第490话<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/fairaytail_downloader.py" target="_blank" rel="external">脚本传送门:image_spder3.py”&gt;妖精的尾巴</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipwg2gvm000twj1qwcx4bruv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipwg9an0000wxs1qv3i9un7z" class="article-share-link">Share</a>
       
       
     </footer>
