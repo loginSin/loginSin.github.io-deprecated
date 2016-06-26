@@ -90,22 +90,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>环境python2.7<br>网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源<br>网络图片的链接一般是<a href="http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到" target="_blank" rel="external">http://****.jpg或者http://****.png这就需要我们获取整个网页，然后遍历从中抓取符合http://****.jpg或者http://****.png的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到</a><br>使用到python的urllib2和re模块，一个负责网络请求，一个负责正则匹配来获取图片链接<br>图片会保存在脚本所在的文件夹用并且以数字命名<br>下面就开始吧<br>1、level(抓取慕课网的课程列表页面的图片)</p>
-<p>#coding=utf-8</p>
-<p>import re,urllib2</p>
-<p>url = “<a href="http://www.imooc.com/course/list" target="_blank" rel="external">http://www.imooc.com/course/list</a>“</p>
-<p>buf = urllib2.urlopen(url)</p>
+        <p>环境python2.7<br>网上有各种各样的图片资源，有时我们想大批量的保存一些网络图片，一个一个的“图片另存为”也太麻烦了，这里我讲讲如何使用python，爬取特定网页的图片资源,网络图片的链接一般是</p><h5><a href="http://****.jpg" target="_blank" rel="external">http://****.jpg</a></h5>或者<h5><a href="http://****.png" target="_blank" rel="external">http://****.png</a></h5>这就需要我们获取整个网页，然后遍历从中抓取符合上述特定的字符串，然后通过这些字符串链接获取到数据，但是不一定能将所有的图片全部抓到<br>使用到python的urllib2和re模块，一个负责网络请求，一个负责正则匹配来获取图片链接<br>图片会保存在脚本所在的文件夹用并且以数字命名<br>下面就开始吧<br>1、level(抓取慕课网的课程列表页面的图片)<p></p>
+<p>#coding=utf-8<br>import re,urllib2<br>url = “<a href="http://www.imooc.com/course/list" target="_blank" rel="external">http://www.imooc.com/course/list</a>“<br>buf = urllib2.urlopen(url)</p>
 <p>#通过正则表达是来获取图片链接列表</p>
-<p>#该正则表达式的意思是匹配网页中以“<a href="http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接" target="_blank" rel="external">http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接</a><br>urllist = re.findall(r”<a href="http://.+\.jpg&quot;,buf.read(" target="_blank" rel="external">http://.+\.jpg&quot;,buf.read(</a>))</p>
-<p>i=0</p>
-<p>for u in urllist:<br>    print (“crawl image %d : %s”%(i+1,u))<br>    image_data = urllib2.urlopen(u)<br>    f = open(str(i)+”.jpg”,’w’)<br>    f.write(image_data.read())<br>    i+=1<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider1.py" target="_blank" rel="external">脚本传送门:image_spder1.py</a><br>2、level2(抓取拉钩首页的图片)<br>上一个脚本只能应对最为简单的情况，因为获取正则表达式匹配到的链接，并没有进行任何检测或者处理，直接发送请求，但是如果正则匹配到的链接有问题，就需要对正则的结果进行处理，而拉钩网就属于这种情况</p>
-<p>#coding=utf-8</p>
-<p>import re,urllib2</p>
-<p>url = “<a href="http://www.lagou.com/" target="_blank" rel="external">http://www.lagou.com/</a>“</p>
-<p>buf = urllib2.urlopen(url)</p>
-<p>#将正则简化，这样就能匹配到所有以“<a href="http://”开头的所有的字符串" target="_blank" rel="external">http://”开头的所有的字符串</a><br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
-<p>i=0</p>
-<p>for u in urllist:</p>
+<p>#该正则表达式的意思是匹配网页中以“<a href="http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接" target="_blank" rel="external">http://”开头并且以“.jpg”结尾的字符串，因为慕课网的页面较为简单，获取的图片链接不需要做特殊的处理就可以获取到完整的链接</a><br>urllist = re.findall(r”<a href="http://.+\.jpg&quot;,buf.read(" target="_blank" rel="external">http://.+\.jpg&quot;,buf.read(</a>))<br>i=0<br>for u in urllist:<br>    print (“crawl image %d : %s”%(i+1,u))<br>    image_data = urllib2.urlopen(u)<br>    f = open(str(i)+”.jpg”,’w’)<br>    f.write(image_data.read())<br>    i+=1<br><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider1.py" target="_blank" rel="external">脚本传送门:image_spder1.py</a><br>2、level2(抓取拉钩首页的图片)<br>上一个脚本只能应对最为简单的情况，因为获取正则表达式匹配到的链接，并没有进行任何检测或者处理，直接发送请求，但是如果正则匹配到的链接有问题，就需要对正则的结果进行处理，而拉钩网就属于这种情况</p>
+<p>#coding=utf-8<br>import re,urllib2<br>url = “<a href="http://www.lagou.com/" target="_blank" rel="external">http://www.lagou.com/</a>“<br>buf = urllib2.urlopen(url)</p>
+<p>#将正则简化，这样就能匹配到所有以“<a href="http://”开头的所有的字符串" target="_blank" rel="external">http://”开头的所有的字符串</a><br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))<br>i=0<br>for u in urllist:</p>
 <pre><code>#并不是所有图片的链接都能拿到数据，所以添加了try
 try:
     #将正则结果中含有png的过滤出来
@@ -127,33 +117,15 @@ try:
 except:
     print (&quot;crawl image failed:%s&quot; %u)
 </code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider2.py" target="_blank" rel="external">脚本传送门:image_spder2.py</a></p>
-<p>2.1、level2.1(优化)<br>上面的那个脚本的通用性就比较高了，增大了正则表达的范围，又将图片链接进行了过滤和截取，但是还需要进行一些优化，如果仔细看上面的脚本会发现只是针对png图片的，如果想要抓取jpg图片就需要将所有的png换成jpg，这是我们可以增减一个数组来保存你想要抓取的图片的类型，然后用for循环抓取该网页所有的类型的图片资源（通常情况下只有jpg和png两种，但是不排除特殊情况比如gif）</p>
-<p>#coding=utf-8</p>
-<p>import re,urllib2</p>
-<p>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]</p>
-<p>buf = urllib2.urlopen(url)</p>
-<p>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))</p>
-<p>for image_type in image_type_arr:</p>
-<pre><code>i=0
-
-for u in urllist:
-    try:
-        if image_type in u:
-            new_url = u[:u.find(image_type)+len(image_type)]
-            print (&quot;crawl image %d:%s&quot;%(i+1,new_url))
-            f = open(str(i)+&quot;.&quot;+image_type,&apos;w&apos;)
-            data = urllib2.urlopen(new_url)
-            f.write(data.read())
-            i += 1
-    except:
-        print (&quot;crawl image failed:%s&quot; %u)
-</code></pre><p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
+<p>2.1、level2.1(优化)<br>上面的那个脚本的通用性就比较高了，增大了正则表达的范围，又将图片链接进行了过滤和截取，但是还需要进行一些优化，如果仔细看上面的脚本会发现只是针对png图片的，如果想要抓取jpg图片就需要将所有的png换成jpg，这是我们可以增减一个数组来保存你想要抓取的图片的类型，然后用for循环抓取该网页所有的类型的图片资源（通常情况下只有jpg和png两种，但是不排除特殊情况比如gif）<br>脚本：</p>
+<p>#coding=utf-8<br>import re,urllib2<br>url = “<a href="http://baozoumanhua.com/" target="_blank" rel="external">http://baozoumanhua.com/</a>“<br>image_type_arr = [“png”,”jpg”,”jepg”,”gif”]<br>buf = urllib2.urlopen(url)<br>urllist = re.findall(r”<a href="http://.+&quot;,buf.read(" target="_blank" rel="external">http://.+&quot;,buf.read(</a>))<br>for image_type in image_type_arr:<br>    i=0<br>    for u in urllist:<br>        try:<br>            if image_type in u:<br>                new_url = u[:u.find(image_type)+len(image_type)]<br>                print (“crawl image %d:%s”%(i+1,new_url))<br>                f = open(str(i)+”.”+image_type,’w’)<br>                data = urllib2.urlopen(new_url)<br>                f.write(data.read())<br>                i += 1<br>        except:<br>            print (“crawl image failed:%s” %u)</p>
+<p><a href="https://raw.githubusercontent.com/loginSin/blogSource/master/sourceCode/python/image_spider/image_spider3.py" target="_blank" rel="external">脚本传送门:image_spder3.py</a></p>
 <p>3、level3(抓取百度图片的图片数据)<br>百度貌似进行了处理，无法使用上面的脚本进行图片的抓取，但是我们任何将抓取到的链接通过浏览器获取，所以我个人认为，百度在收到请求的时候加了一些处理，只让浏览器能够获取数据，但是目前我尚不清楚如何将python请求伪装成正常的浏览器请求，所以抓取百度图片我暂时也没有办法，等我找到解决方案，我会贴出来的</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipw959l8000vn51quun36vvi" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/26/python-爬虫-爬取特定网页的图片/" data-id="cipw9brdh000wnt1q7rsmdu1s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +178,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="cipw959kz000qn51qn1oxlj51" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/24/python-urllib2实现网页下载器/" data-id="cipw9brd5000qnt1q8i0xo731" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +215,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipw959kt000mn51qv8jqsq99" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/21/python-mac-mysql链接出错/" data-id="cipw9brd4000pnt1qb431x1n5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +254,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipw959l6000tn51qt7zpfpz2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/20/python-mac安装MySQLdb-Python-mysql/" data-id="cipw9brd9000snt1q5z4muink" class="article-share-link">Share</a>
       
       
     </footer>
@@ -323,7 +295,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipw959l4000sn51qdga7c4dg" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-定义类方法/" data-id="cipw9brdb000tnt1qdz97du3x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -362,7 +334,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipw959l1000rn51qwa3l2uns" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/18/python-动态添加方法/" data-id="cipw9brd6000rnt1qdfhzhtrk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -403,7 +375,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipw959kv000nn51qsxp187re" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/16/markdown-添加图片和超链接/" data-id="cipw9brd1000ont1q5c5f64h9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -442,7 +414,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipw959jj0004n51q5k53bml8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/XMPP-mac搭建xmpp服务器-openfire/" data-id="cipw9brbi0002nt1qwxw8epwj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,7 +455,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipw959j80000n51qmp035ox4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/15/MySQL-mysql5.7-for-Mac-10-11安装/" data-id="cipw9brba0000nt1qjmwoertj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -522,7 +494,7 @@ for u in urllist:
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipw959ky000pn51qlitie3fy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/loginSin/loginSin.github.io/loginSin.github.io/2016/06/14/python-Mac配置python集成开发环境/" data-id="cipw9brcz000nnt1q1ledirhj" class="article-share-link">Share</a>
       
       
     </footer>
